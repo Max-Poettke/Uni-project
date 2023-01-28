@@ -34,6 +34,7 @@ public class InLevelControl : MonoBehaviour
     public bool autoRestart = false;
     private bool started = false;
     private bool waited = false;
+    private bool firing = false;
     //                                      misc
     [SerializeField] private float rotationSpeed;
     private float timer = 0.0f;
@@ -106,10 +107,13 @@ public class InLevelControl : MonoBehaviour
                 waitRoutine = StartCoroutine(waitABit());    
             }
             if (!waited) return true;
-            waited = false;
-            enabled = false;
-            gameObject.GetComponent<WorldSelection>().enabled = true;
-            sceneManagementScript.LoadScene("WorldSelection");
+            if (Input.anyKeyDown)
+            {
+                waited = false;
+                enabled = false;
+                gameObject.GetComponent<WorldSelection>().enabled = true;
+                sceneManagementScript.LoadScene("WorldSelection");
+            }
             return true;
         }
 
@@ -128,6 +132,9 @@ public class InLevelControl : MonoBehaviour
 
     public void RestartLevel()
     {
+        died = false;
+        firing = false;
+        youDiedUI.SetActive(false);
         sceneManagementScript.LoadScene("LevelScene");
     }
 
@@ -136,9 +143,19 @@ public class InLevelControl : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             //fire your gun
-            gunScript.Fire();
+            firing = true;
         }
 
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            firing = false;
+        }
+
+        if (firing)
+        {
+            gunScript.Fire();
+        }
+        
         if(Input.GetKeyDown(KeyCode.E))
         {
             //use your trinket

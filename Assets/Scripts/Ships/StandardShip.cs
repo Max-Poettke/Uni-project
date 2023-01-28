@@ -4,7 +4,7 @@ public class StandardShip : MonoBehaviour, IShip
 {
     private Camera _camera;
     public Transform planet;
-    private InLevelControl inLevelControlScript;
+    public InLevelControl inLevelControlScript;
 
     private bool foundTargetPlanet = false;
 
@@ -60,6 +60,12 @@ public class StandardShip : MonoBehaviour, IShip
         transform.position += transform.up * amtToMoveX;
         transform.RotateAround(planet.position, planet.forward, -amtToMoveY);
         if (!CheckWithinBounds(amtToMoveX, amtToMoveY)) transform.position = pos;
+    }
+
+    public void Die()
+    {
+        inLevelControlScript.died = true;
+        Destroy(gameObject);
     }
 
     public void tryGetInfo()

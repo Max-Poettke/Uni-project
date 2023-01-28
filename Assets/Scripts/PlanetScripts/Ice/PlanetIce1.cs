@@ -19,12 +19,14 @@ public class PlanetIce1 : MonoBehaviour, IPlanet, IHp
     private Coroutine miscRoutine;
     private Coroutine shrinkRoutine;
     private Coroutine shootingRoutine;
+    private SceneManagement sceneManager;
     void Start()
     {
+        controller = GameObject.FindGameObjectWithTag("GameMaster").GetComponent<InLevelControl>();
+        if (controller.gameState != SceneManagement.GameStates.InLevel) return;
         initialHP = hp;
         initialScale = transform.localScale.x;
-        controller = GameObject.FindGameObjectWithTag("GameMaster").GetComponent<InLevelControl>();
-        //miscRoutine = StartCoroutine(TryGetPlayerTransform());
+        miscRoutine = StartCoroutine(TryGetPlayerTransform());
     }
     
     public void Die()
@@ -45,11 +47,13 @@ public class PlanetIce1 : MonoBehaviour, IPlanet, IHp
 
     public void FireProjectile()
     {
+        if (controller.died) return;
         var projectile = Instantiate(standardProjectile);
         projectile.transform.position = transform.position;
         projectile.transform.LookAt(playerTransform.position);
-        float rand = Random.Range(-30, 30);
-        projectile.transform.Rotate(0, 0, rand);
+        projectile.GetComponent<StandardIceProjectile>().speed = Random.Range(1.5f, 3f);
+        float rand = Random.Range(-40, 40);
+        projectile.transform.Rotate(rand, 0, 0);
     }
 
     public void Shrink()
@@ -129,7 +133,7 @@ public class PlanetIce1 : MonoBehaviour, IPlanet, IHp
 
     public IEnumerator FireContinuously()
     {
-        while (true)
+        while (!controller.died)
         {
             yield return new WaitForSeconds(firingRate);
             FireProjectile();

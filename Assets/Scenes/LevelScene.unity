@@ -3162,6 +3162,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   planet: {fileID: 0}
+  inLevelControlScript: {fileID: 0}
   speed: 5.4
   rotationSpeed: 29.88
   isMoving: 0
