@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: ae89ff994d4ce284f8fa6c3dca329672
+  - enabled: 1
+    path: Assets/Scenes/WorldSelection.unity
+    guid: 3cfe982f69ad3ee438c2c6f2702ca1a3
+  - enabled: 1
+    path: Assets/Scenes/LevelSelection.unity
+    guid: 7e8a9b24a29fc3544897b2034afac781
+  - enabled: 1
+    path: Assets/Scenes/ShipModification.unity
+    guid: dcd22e71c7d4f2442a653589eafda35b
+  - enabled: 1
+    path: Assets/Scenes/LevelScene.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 0
+    path: Assets/Scenes/Spacehooter 03.unity
+    guid: 16cf23da0d5de91488e3b2c01a8a898c
+  m_configObjects: {}
