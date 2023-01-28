@@ -1025,7 +1025,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Escape = Main Menu
+  m_text: Escape = back
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1133,36 +1133,6 @@ Transform:
   - {fileID: 1662645147}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1534650266
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1534650267}
-  m_Layer: 5
-  m_Name: Text
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1534650267
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1534650266}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2027582522}
-  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1549492950
 GameObject:
@@ -1395,6 +1365,61 @@ Transform:
   - {fileID: 5103993413451303506}
   m_Father: {fileID: 1449413513}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1679685265
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1679685267}
+  - component: {fileID: 1679685266}
+  m_Layer: 0
+  m_Name: WorldInformationProvider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1679685266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1679685265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db44a8b332f0c4f4a84b865d27a005cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  planetTransforms:
+  - {fileID: 7970080309065354329}
+  - {fileID: 5705228593254302152}
+  - {fileID: 3018945163932304399}
+  - {fileID: 5103993413451303506}
+  planetCenter: {fileID: 1662645146}
+  cameraObject: {fileID: 1549492950}
+  blackScreen: {fileID: 979365305}
+  text:
+  - {fileID: 1431510195}
+  - {fileID: 1820262930}
+  - {fileID: 1795452418}
+--- !u!4 &1679685267
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1679685265}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -26.673187, y: 125.668, z: 10.607483}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1699019786
 GameObject:
@@ -1835,7 +1860,7 @@ MonoBehaviour:
   planetCenter: {fileID: 1662645146}
   cameraObject: {fileID: 1549492950}
   blackScreen: {fileID: 979365305}
-  text: {fileID: 1534650266}
+  text: []
   planets_Ice:
   - {fileID: 4833730628615545412, guid: 74c086df4abd3644e94a508ad6f0aa78, type: 3}
   - {fileID: 5906848055389806269, guid: 28a59a1aed91e8d409901f038e2b0fa4, type: 3}
@@ -1884,6 +1909,12 @@ MonoBehaviour:
   ships:
   - {fileID: 6819866625338400234, guid: c5716138484166f4ba9d72a7b1f1e882, type: 3}
   trinkets: []
+  instantiatedPlanet: {fileID: 0}
+  instantiatedShip: {fileID: 0}
+  instantiatedGun: {fileID: 0}
+  instantiatedTrinket: {fileID: 0}
+  shipPosition: {fileID: 0}
+  planetPosition: {fileID: 0}
   levelCompletedUI: {fileID: 0}
   youDiedUI: {fileID: 0}
   pauseUI: {fileID: 0}
@@ -2100,7 +2131,6 @@ RectTransform:
   - {fileID: 1431510196}
   - {fileID: 1820262931}
   - {fileID: 1795452419}
-  - {fileID: 1534650267}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

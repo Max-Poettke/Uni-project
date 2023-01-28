@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3139327207487201100}
   - component: {fileID: 8695791298419205045}
   - component: {fileID: -6622124332809084111}
+  - component: {fileID: 8999896901663875009}
   m_Layer: 0
   m_Name: Earth-3
   m_TagString: Untagged
@@ -27,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6958481513472563049}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 528.48865, y: 291.20456, z: -1412.682}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4489592165477990698}
@@ -106,6 +107,19 @@ MonoBehaviour:
   randomize: 0
   maxSpeed: 0
   minSpeed: 0
+--- !u!135 &8999896901663875009
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6958481513472563049}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: -0.0039646626, y: 0.017573893, z: -0.02147913}
 --- !u!1 &8986137133683762216
 GameObject:
   m_ObjectHideFlags: 0
@@ -122,7 +136,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4489592165477990698
 Transform:
   m_ObjectHideFlags: 0

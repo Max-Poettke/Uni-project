@@ -5,4 +5,5 @@ using UnityEngine;
 public interface IShip
 {
     void Move();
+    void tryGetInfo();
 }

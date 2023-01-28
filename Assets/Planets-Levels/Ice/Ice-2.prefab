@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1943593945328948888}
   - component: {fileID: 5315796832413379169}
   - component: {fileID: -3315279639418224546}
+  - component: {fileID: -1753322552903641507}
   m_Layer: 0
   m_Name: Ice-2
   m_TagString: Untagged
@@ -27,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5906848055389806269}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 530.6236, y: 293.15997, z: -1412.6868}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1307508210149064581}
@@ -103,6 +104,19 @@ MonoBehaviour:
   randomize: 0
   maxSpeed: 0
   minSpeed: 0
+--- !u!135 &-1753322552903641507
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5906848055389806269}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: -0.027405739, y: -0.0076696873, z: -0.0414176}
 --- !u!1 &8880978887306003892
 GameObject:
   m_ObjectHideFlags: 0

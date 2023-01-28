@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3968423322501069908}
   - component: {fileID: 7218745285542330541}
   - component: {fileID: -5019294042948346434}
+  - component: {fileID: 241618179308222498}
   m_Layer: 0
   m_Name: Desert-2
   m_TagString: Untagged
@@ -27,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8940477159010792561}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 530.61755, y: 291.70508, z: -1407.8854}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3891885707376483312}
@@ -103,6 +104,19 @@ MonoBehaviour:
   randomize: 0
   maxSpeed: 0
   minSpeed: 0
+--- !u!135 &241618179308222498
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8940477159010792561}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0.0049095154, y: 0.006501913, z: -0.0006580949}
 --- !u!1 &8982230440150730975
 GameObject:
   m_ObjectHideFlags: 0
@@ -119,7 +133,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3891885707376483312
 Transform:
   m_ObjectHideFlags: 0

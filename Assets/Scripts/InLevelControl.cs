@@ -10,6 +10,7 @@ using UnityEngine.UI;
 
 public class InLevelControl : MonoBehaviour
 {
+    private static GameObject gameMasterInstance;
     //                                      things to instantiate upon level start
     public GameObject planet;
     [SerializeField] private GameObject[] guns;
@@ -19,8 +20,14 @@ public class InLevelControl : MonoBehaviour
     [SerializeField] private GameObject[] trinkets;
     private int currentTrinketIndex = 0;
     
-    //                                      things to get from the scene
+    public GameObject instantiatedPlanet;
+    public GameObject instantiatedShip;
+    public GameObject instantiatedGun;
+    public GameObject instantiatedTrinket;
     
+    //                                      things to get from the scene
+    public GameObject shipPosition;
+    public GameObject planetPosition;
     public GameObject levelCompletedUI;
     public GameObject youDiedUI;
     public GameObject pauseUI;
@@ -32,11 +39,14 @@ public class InLevelControl : MonoBehaviour
     public bool levelCompleted = false;
     public bool died = false;
     public bool autoRestart = false;
+    private bool started = false;
+    private bool waited = false;
     //                                      misc
     [SerializeField] private float rotationSpeed;
     private float timer = 0.0f;
     private float points = 0.0f;
     private Vector3 rotationDirection;
+    private Coroutine waitRoutine = null;
 
     //                                      references
     private Planet planetScript;
@@ -45,19 +55,43 @@ public class InLevelControl : MonoBehaviour
 
     void Awake()
     {
-        DontDestroyOnLoad(this);
+        DontDestroyOnLoad(this); 
+        if (gameMasterInstance == null)
+        {
+            gameMasterInstance = this.gameObject;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+            
     }
-    void Start()
+
+    public void StartLevel()
     {
         gameState = SceneManagement.GameStates.InLevel;
+        sceneManagementScript = GameObject.FindGameObjectWithTag("SceneManager").GetComponent<SceneManagement>();
         rotationDirection = transform.forward;
         gunScript = guns[currentGunIndex].GetComponent<IGun>();
-        shipScript = ships[currentShipIndex].GetComponent<IShip>();
-        trinketScript = trinkets[currentTrinketIndex].GetComponent<ITrinket>();
+        //shipScript = ships[currentShipIndex].GetComponent<IShip>();
+        instantiatedPlanet = Instantiate(planet);
+        instantiatedPlanet.transform.position = planetPosition.transform.position;
+        instantiatedPlanet.transform.localScale = planetPosition.transform.localScale;
+        instantiatedShip = Instantiate(ships[currentShipIndex]);
+        instantiatedPlanet.GetComponent<Rotatator>().enabled = true;
+        shipScript = instantiatedShip.GetComponent<IShip>();
+        shipScript.tryGetInfo();
+        instantiatedShip.transform.position = shipPosition.transform.position;
+        instantiatedShip.transform.localScale = shipPosition.transform.localScale;
+        instantiatedGun = Instantiate(guns[currentGunIndex], instantiatedShip.transform.GetChild(0));
+        gunScript = instantiatedGun.GetComponent<IGun>();
+        started = true;
+        //trinketScript = trinkets[currentTrinketIndex].GetComponent<ITrinket>();
     }
 
     void Update()
     {
+        if (!started) return;
         if (gameState == SceneManagement.GameStates.InLevel)
         {
             if (CheckExceptions()) return;
@@ -68,17 +102,21 @@ public class InLevelControl : MonoBehaviour
         }
     }
 
-    void InitializeLevel()
-    {
-        
-    }
-
     bool CheckExceptions()
     {
         if (levelCompleted)
         {
             //load level information UI
             levelCompletedUI.SetActive(true);
+            if (waitRoutine == null)
+            {
+                waitRoutine = StartCoroutine(waitABit());    
+            }
+            if (!waited) return true;
+            waited = false;
+            enabled = false;
+            gameObject.GetComponent<WorldSelection>().enabled = true;
+            sceneManagementScript.LoadScene("WorldSelection");
             return true;
         }
 
@@ -87,12 +125,17 @@ public class InLevelControl : MonoBehaviour
             //Reload the level and reset important information
             if (autoRestart)
             {
-                StartCoroutine(ResetLevel());   
+                sceneManagementScript.LoadScene("LevelScene");
             }
             youDiedUI.SetActive(true);
             return true;
         }
         return false;
+    }
+
+    public void RestartLevel()
+    {
+        sceneManagementScript.LoadScene("LevelScene");
     }
 
     void CheckInputs()
@@ -121,12 +164,9 @@ public class InLevelControl : MonoBehaviour
         planet.transform.Rotate(rotationSpeed * rotationDirection * Time.deltaTime);
     }
 
-    public void RestartLevel()
+    IEnumerator waitABit()
     {
-        
-    }
-    IEnumerator ResetLevel()
-    {
-        yield return null;
+        yield return new WaitForSeconds(2);
+        waited = true;
     }
 }

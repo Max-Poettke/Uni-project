@@ -462,6 +462,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 95658355}
   m_CullTransparentMesh: 1
+--- !u!1 &118709146
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 118709147}
+  m_Layer: 0
+  m_Name: ShipPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &118709147
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 118709146}
+  m_LocalRotation: {x: -0, y: -0, z: -0.70710576, w: 0.7071079}
+  m_LocalPosition: {x: -5.79, y: 0, z: -0.019671}
+  m_LocalScale: {x: 0.33463156, y: 0.33463156, z: 0.3346315}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &147986053
 GameObject:
   m_ObjectHideFlags: 0
@@ -696,7 +726,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9198251450829191272, guid: 28597c4c2f7e32d498c4f34ff6d3d9e7, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 9198251450829191272, guid: 28597c4c2f7e32d498c4f34ff6d3d9e7, type: 3}
       propertyPath: m_LocalScale.x
@@ -2880,7 +2910,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 7af2ee3ebcd75bf4188363b891e2bec2, type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7af2ee3ebcd75bf4188363b891e2bec2, type: 3}
       propertyPath: m_LocalScale.x
@@ -3004,6 +3034,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfd6b8e538ec6ed488cd74ee1cabfa6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  planet: {fileID: 0}
   speed: 5.4
   rotationSpeed: 29.88
   isMoving: 0
@@ -3317,6 +3348,7 @@ MonoBehaviour:
   youDiedUI: {fileID: 776459740}
   pauseUI: {fileID: 1097468160}
   planetCenter: {fileID: 27819265}
+  shipPosition: {fileID: 118709146}
   tryAgainButton: {fileID: 147986055}
 --- !u!4 &1937236010
 Transform:

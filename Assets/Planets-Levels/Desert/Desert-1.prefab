@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2022146674021956269
 Transform:
   m_ObjectHideFlags: 0
@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 2531163614171855360}
   - component: {fileID: 8078602922278029049}
   - component: {fileID: -6755059270523094771}
+  - component: {fileID: -3249898994263205569}
   m_Layer: 0
   m_Name: Desert-1
   m_TagString: Untagged
@@ -109,7 +110,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7503032724102492709}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 528.7285, y: 291.08395, z: -1407.7456}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2022146674021956269}
@@ -185,3 +186,16 @@ MonoBehaviour:
   randomize: 0
   maxSpeed: 0
   minSpeed: 0
+--- !u!135 &-3249898994263205569
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7503032724102492709}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0.020543098, y: -0.018392503, z: -0.006389439}
