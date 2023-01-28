@@ -24,7 +24,6 @@ public class LevelSelection : MonoBehaviour
         
         //indicators[0].SetActive(true);
         //      blackScreeen can for some reason not be set. -> GameObject reference is missing
-        // this is a test
     }
 
     void Update()
