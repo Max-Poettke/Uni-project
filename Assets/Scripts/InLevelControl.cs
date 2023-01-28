@@ -5,31 +5,40 @@ using TMPro;
 using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Experimental.Audio;
+using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
 
 public class InLevelControl : MonoBehaviour
 {
+    //                                      things to instantiate upon level start
+    public GameObject planet;
+    [SerializeField] private GameObject[] guns;
+    private int currentGunIndex = 0;
+    [SerializeField] private GameObject[] ships;
+    private int currentShipIndex = 0;
+    [SerializeField] private GameObject[] trinkets;
+    private int currentTrinketIndex = 0;
     
-    public bool cantMove = false;
+    //                                      things to get from the scene
     
-    [SerializeField] public GameObject planet;
-    [SerializeField] private GameObject currentGun;
-    [SerializeField] private GameObject currentShip;
-    //[SerializeField] private GameObject currentTrinket;
-    
-    [SerializeField] private float rotationSpeed;
-
-    [SerializeField] private GameObject bgImage;
-    [SerializeField] private GameObject text;
+    public GameObject levelCompletedUI;
+    public GameObject youDiedUI;
+    public GameObject pauseUI;
 
     private IGun gunScript;
-    private IShip shipScript;   
-    //private ITrinket trinketScript;
-    
-    private float timer = 0;
+    private IShip shipScript; 
+    private ITrinket trinketScript;
+    //                                      booleans for controlling the gameState
+    public bool levelCompleted = false;
+    public bool died = false;
+    public bool autoRestart = false;
+    //                                      misc
+    [SerializeField] private float rotationSpeed;
+    private float timer = 0.0f;
+    private float points = 0.0f;
     private Vector3 rotationDirection;
-    //private Coroutine shrinkingRoutine;
-    private Coroutine endRoutine;
+
+    //                                      references
     private Planet planetScript;
     public SceneManagement.GameStates gameState;
     private SceneManagement sceneManagementScript;
@@ -41,42 +50,49 @@ public class InLevelControl : MonoBehaviour
     void Start()
     {
         gameState = SceneManagement.GameStates.InLevel;
-        cantMove = false;
         rotationDirection = transform.forward;
-        gunScript = currentGun.GetComponent<IGun>();
+        gunScript = guns[currentGunIndex].GetComponent<IGun>();
+        shipScript = ships[currentShipIndex].GetComponent<IShip>();
+        trinketScript = trinkets[currentTrinketIndex].GetComponent<ITrinket>();
     }
-    
-    // Update is called once per frame
+
     void Update()
     {
         if (gameState == SceneManagement.GameStates.InLevel)
         {
-            if (cantMove)
-            {
-                //load level information UI
-                bgImage.SetActive(true);
-                text.SetActive(true);
-                return;
-            }
+            if (CheckExceptions()) return;
             timer += Time.deltaTime;
             CheckInputs();
-            rotatePlanet();    
+            rotatePlanet();
+            shipScript.Move();
         }
+    }
+
+    void InitializeLevel()
+    {
         
-        if (cantMove) return;
-        shipScript.Move();
-        /*
-        if (Input.GetKeyDown(KeyCode.Space))
+    }
+
+    bool CheckExceptions()
+    {
+        if (levelCompleted)
         {
-            if (shrinkingRoutine == null)
-            {
-                shrinkingRoutine = StartCoroutine(planetScript.ShrinkPlanet(50));
-                return;
-            }
-            StopCoroutine(shrinkingRoutine);
-            shrinkingRoutine = StartCoroutine(planetScript.ShrinkPlanet(50));
+            //load level information UI
+            levelCompletedUI.SetActive(true);
+            return true;
         }
-        */
+
+        if (died)
+        {
+            //Reload the level and reset important information
+            if (autoRestart)
+            {
+                StartCoroutine(ResetLevel());   
+            }
+            youDiedUI.SetActive(true);
+            return true;
+        }
+        return false;
     }
 
     void CheckInputs()
@@ -85,28 +101,32 @@ public class InLevelControl : MonoBehaviour
         {
             //fire your gun
             gunScript.Fire();
-            /*
-            laser.enabled = true;
-            laser.Play();
-            firing = true;
-            scaleRoutine = StartCoroutine(AnimateLaser());
-            */
         }
 
         if(Input.GetKeyDown(KeyCode.E))
         {
-            //use your utility
+            //use your trinket
+            trinketScript.Use();
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             //open the menu
+            pauseUI.SetActive(true);
         }
     }
 
     void rotatePlanet()
     {
-        if (cantMove) return;
         planet.transform.Rotate(rotationSpeed * rotationDirection * Time.deltaTime);
+    }
+
+    public void RestartLevel()
+    {
+        
+    }
+    IEnumerator ResetLevel()
+    {
+        yield return null;
     }
 }

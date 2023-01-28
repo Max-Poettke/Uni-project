@@ -5,25 +5,21 @@ using UnityEngine.UI;
 
 public class LevelSelection : MonoBehaviour
 {
-    [SerializeField] private RawImage blackScreen;
+    public RawImage blackScreen;
     private SceneManagement sceneManagementScript;
     private int selected = 0;
     public GameObject [] planets;
     public GameObject[] indicators;
     private Coroutine selectorBlinkRoutine;
+    public GameObject cameraObject;
+    private Coroutine selectionCoroutine;
+    private InLevelControl controlScript;
     
 
     void Start()
     {
+        controlScript = gameObject.GetComponent<InLevelControl>();
         sceneManagementScript = GameObject.FindGameObjectWithTag("SceneManager").GetComponent<SceneManagement>();
-        for (int i = 0; i < planets.Length; i++)
-        {
-            indicators[i] = planets[i].transform.GetChild(0).gameObject;
-            indicators[i].SetActive(false);
-        }
-        
-        //indicators[0].SetActive(true);
-        //      blackScreeen can for some reason not be set. -> GameObject reference is missing
     }
 
     void Update()
@@ -43,16 +39,47 @@ public class LevelSelection : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.A))
         {
             indicators[selected].SetActive(false);
-            selected = (selected + 1) % 3;
+            selected = (selected + 2) % 3;
             indicators[selected].SetActive(true);
         }
 
         if (Input.GetKeyDown(KeyCode.D))
         {
             indicators[selected].SetActive(false);
-            selected = (selected + 2) % 3;
+            selected = (selected + 1) % 3;
             indicators[selected].SetActive(true);
         }
+        
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (selectionCoroutine != null)
+            {
+                StopCoroutine(selectionCoroutine);
+                StartCoroutine(selectLevel());
+            }
+            StartCoroutine(selectLevel());
+        }
+    }
+    
+    private IEnumerator selectLevel()
+    {
+        //text.SetActive(false);
+        float alpha = 0f;
+        float timer = 0f;
+        while (alpha < 1f)
+        {
+            timer += Time.deltaTime;
+            alpha = Mathf.Lerp(alpha, 1f, timer / 3f);
+            //Debug.Log(alpha);
+            cameraObject.transform.position = Vector3.Lerp(cameraObject.transform.position, planets[selected].transform.position, timer / 50f);
+            Color currColor = blackScreen.color;
+            currColor.a = alpha;
+            blackScreen.color = currColor;
+            yield return new WaitForFixedUpdate();
+        }
+        enabled = false;
+        controlScript.planet = planets[selected];
+        sceneManagementScript.LoadScene("LevelScene");
     }
 
 }

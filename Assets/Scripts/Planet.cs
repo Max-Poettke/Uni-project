@@ -5,8 +5,8 @@ using UnityEngine;
 public class Planet : MonoBehaviour, IHp
 {
     [SerializeField] private float hp;
-    private InLevelControl controller;
     private float initialScale;
+    private InLevelControl controller;
     private Coroutine shrinkingRoutine;
     // Start is called before the first frame update
     void Start()
@@ -38,8 +38,8 @@ public class Planet : MonoBehaviour, IHp
 
     public void Die()
     {
-        //Level should end with this function
-        controller.cantMove = true;
+        //Ends the level
+        controller.levelCompleted = true;
         Destroy(gameObject);
     }
 

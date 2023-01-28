@@ -102,7 +102,7 @@ public class WorldSelection : MonoBehaviour
         {
             timer += Time.deltaTime;
             alpha = Mathf.Lerp(alpha, 1f, timer / 3f);
-            Debug.Log(alpha);
+            //Debug.Log(alpha);
             cameraObject.transform.position = Vector3.Lerp(cameraObject.transform.position, planetTransforms[worldIndex].position, timer / 50f);
             Color currColor = blackScreen.color;
             currColor.a = alpha;
@@ -111,9 +111,10 @@ public class WorldSelection : MonoBehaviour
         }
         enabled = false;
         sceneManagementScript.LoadScene("LevelSelection");
+        //Debug.Log(worldIndex);
+        //Debug.Log(planetsWhole[worldIndex]);
         levelSelectionScript.planets = planetsWhole[worldIndex];
         levelSelectionScript.indicators = new GameObject[3];
         levelSelectionScript.enabled = true;
-        //load level selection
     }
 }
