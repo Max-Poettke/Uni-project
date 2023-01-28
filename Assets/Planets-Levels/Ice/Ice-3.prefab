@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 287547647590628071}
   - component: {fileID: 6472121005906111068}
+  - component: {fileID: 4404930952664864670}
   m_Layer: 0
   m_Name: Selector
   m_TagString: Untagged
@@ -82,6 +83,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!54 &4404930952664864670
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3493942068077975252}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &6925774051847845965
 GameObject:
   m_ObjectHideFlags: 0

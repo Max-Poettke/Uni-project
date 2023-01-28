@@ -2,14 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StandardProjectile : MonoBehaviour , IMoveable, IKillable
+public class StandardIceProjectile : MonoBehaviour
 {
     //public GameObject explosionPrefab;
-    public Transform targetTransform;
     public float speed = 2f;
-    public float armorPenetrationFactor = 1f;
-    public float damage = 5f;
-    public float lifeTime = 2f;
+    public float lifeTime = 3f;
     private float timer = 0f;
     private InLevelControl controller;
 
@@ -17,8 +14,6 @@ public class StandardProjectile : MonoBehaviour , IMoveable, IKillable
     {
         controller = GameObject.FindGameObjectWithTag("GameMaster").GetComponent<InLevelControl>();
     }
-
-    // Update is called once per frame
     void Update()
     {
         if (controller.died) return;
@@ -37,8 +32,7 @@ public class StandardProjectile : MonoBehaviour , IMoveable, IKillable
 
     public void Move()
     {
-        transform.LookAt(targetTransform);
-        transform.position += speed * Time.deltaTime * transform.up;
+        transform.position += speed * Time.deltaTime * transform.forward;
     }
     void FixedUpdate()
     {
@@ -52,15 +46,15 @@ public class StandardProjectile : MonoBehaviour , IMoveable, IKillable
     }
     public void Die()
     {
-        Destroy(this.gameObject);
+        Destroy(gameObject);
     }
     
-    
-    void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider col)
     {
-        if(other.TryGetComponent(out IHp killableObject))
+        Debug.Log("collision detected");
+        if(col.TryGetComponent(out IShip player))
         {
-            killableObject.TakeDamage(damage, armorPenetrationFactor);
+            player.Die();
             Die();
         }
     }
