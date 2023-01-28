@@ -11,6 +11,6 @@ This is a repository for my practical project from uni
 6. End of a mission
 
 
-## Things that need to be done still>
+## Things that need to be done still:
 1. Main gameplay loop -> Real start with text introduction, bullethell segment, ending screen
 2. Every single planet
