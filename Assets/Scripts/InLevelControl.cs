@@ -111,6 +111,7 @@ public class InLevelControl : MonoBehaviour
             {
                 waited = false;
                 enabled = false;
+                levelCompleted = false;
                 gameObject.GetComponent<WorldSelection>().enabled = true;
                 sceneManagementScript.LoadScene("WorldSelection");
             }
