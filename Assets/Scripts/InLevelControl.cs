@@ -1,12 +1,5 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using TMPro;
-using UnityEditorInternal;
 using UnityEngine;
-using UnityEngine.Experimental.Audio;
-using UnityEngine.PlayerLoop;
-using UnityEngine.UI;
 
 public class InLevelControl : MonoBehaviour
 {

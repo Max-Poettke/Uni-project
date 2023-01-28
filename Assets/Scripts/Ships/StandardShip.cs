@@ -1,13 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Build.Reporting;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
-using UnityEngine.VFX;
-using Object = UnityEngine.Object;
 
 public class StandardShip : MonoBehaviour, IShip
 {
