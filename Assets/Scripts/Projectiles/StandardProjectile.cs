@@ -65,6 +65,7 @@ public class StandardProjectile : MonoBehaviour , IMoveable, IKillable
         {
             //collision detection for vulnerabilities
             other.GetComponent<Vulnerability>().TakeDamage(damage, armorPenetrationFactor);
+            controller.hitVulnerabilities++;
             return;
         }
         
@@ -79,6 +80,8 @@ public class StandardProjectile : MonoBehaviour , IMoveable, IKillable
             {
                 Die();
             }
+            controller.destroyedProjectiles++;
+            
             return;
         }
         

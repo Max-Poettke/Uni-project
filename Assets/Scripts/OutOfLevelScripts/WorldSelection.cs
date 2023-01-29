@@ -20,17 +20,25 @@ public class WorldSelection : MonoBehaviour
     [SerializeField] private GameObject[] planets_Alien = new GameObject[3];
     private GameObject[][] planetsWhole = new GameObject[4][];
     private Coroutine selectionCoroutine;
+    private Coroutine leaveRoutine;
     private SceneManagement sceneManagementScript;
     private LevelSelection levelSelectionScript;
     float targetRotationY = 0;
     void Start()
     {
-        sceneManagementScript = GameObject.FindGameObjectWithTag("SceneManager").GetComponent<SceneManagement>();
-        levelSelectionScript = GetComponent<LevelSelection>();
+        GetInfo();
+        
         planetsWhole[0] = planets_Ice;
         planetsWhole[1] = planets_Earth;
         planetsWhole[2] = planets_Desert;
         planetsWhole[3] = planets_Alien;
+    }
+
+    public void GetInfo()
+    {
+        sceneManagementScript = GameObject.FindGameObjectWithTag("SceneManager").GetComponent<SceneManagement>();
+        levelSelectionScript = GetComponent<LevelSelection>();
+        worldIndex = 0;
     }
 
     // Update is called once per frame
@@ -43,8 +51,17 @@ public class WorldSelection : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Debug.Log("Leaving");
-            StartCoroutine(sceneManagementScript.LeaveScene("MainMenu", blackScreen));
+            Debug.Log("manager: " + sceneManagementScript);
+            Debug.Log("blacScreen: " + blackScreen);
+            if (leaveRoutine != null)
+            {
+                StopCoroutine(leaveRoutine);
+                leaveRoutine = StartCoroutine(sceneManagementScript.LeaveScene("MainMenu", blackScreen));
+                return;
+            }
+            
+            leaveRoutine = StartCoroutine(sceneManagementScript.LeaveScene("MainMenu", blackScreen));
+            
         }
         
         if (Input.GetKeyDown(KeyCode.A))

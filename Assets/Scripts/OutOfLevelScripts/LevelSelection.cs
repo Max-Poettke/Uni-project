@@ -32,7 +32,9 @@ public class LevelSelection : MonoBehaviour
             Debug.Log("Leaving");
             //StartCoroutine(sceneManagementScript.LeaveScene("MainMenu", blackScreen));
             enabled = false;
-            GetComponent<WorldSelection>().enabled = true;
+            var ws = GetComponent<WorldSelection>();
+            ws.enabled = true;
+            ws.worldIndex = 0;
             sceneManagementScript.LoadScene("WorldSelection");
         }
         

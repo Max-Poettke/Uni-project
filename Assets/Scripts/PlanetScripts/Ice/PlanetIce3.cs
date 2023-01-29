@@ -118,7 +118,7 @@ public class PlanetIce3 : MonoBehaviour, IPlanet
     public void TwoThirds()
     {
         armor += 2;
-        firingRate -= 0.07f;
+        firingRate -= 0.05f;
         chanceToSpawnBoulder = 2f / 6f;
         Destroy(vulnerability);
         StartCoroutine(DeactivateMobility(1.5f));

@@ -13,6 +13,7 @@ TagManager:
   - BlackScreen
   - PlanetPosition
   - Vulnerability
+  - TextParent
   layers:
   - Default
   - TransparentFX

@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class InLevelControl : MonoBehaviour
@@ -24,6 +25,7 @@ public class InLevelControl : MonoBehaviour
     public GameObject levelCompletedUI;
     public GameObject youDiedUI;
     public GameObject pauseUI;
+    public TMP_Text [] text; //0 -> time | 1 -> Destroyed Projectiles | 2 -> Vulnerabilities | 3 -> Points
 
     private IGun gunScript;
     private IShip shipScript; 
@@ -40,6 +42,8 @@ public class InLevelControl : MonoBehaviour
     [SerializeField] private float rotationSpeed;
     private float timer = 0.0f;
     private float points = 0.0f;
+    public float destroyedProjectiles = 0.0f;
+    public float hitVulnerabilities = 0.0f;
     private Vector3 rotationDirection;
     private Coroutine waitRoutine = null;
 
@@ -68,7 +72,6 @@ public class InLevelControl : MonoBehaviour
         sceneManagementScript = GameObject.FindGameObjectWithTag("SceneManager").GetComponent<SceneManagement>();
         rotationDirection = transform.forward;
         gunScript = guns[currentGunIndex].GetComponent<IGun>();
-        //shipScript = ships[currentShipIndex].GetComponent<IShip>();
         instantiatedPlanet = Instantiate(planet);
         instantiatedPlanet.transform.position = planetPosition.transform.position;
         instantiatedPlanet.transform.localScale = planetPosition.transform.localScale;
@@ -77,10 +80,12 @@ public class InLevelControl : MonoBehaviour
         shipScript.tryGetInfo();
         instantiatedShip.transform.position = shipPosition.transform.position;
         instantiatedShip.transform.localScale = shipPosition.transform.localScale;
+        instantiatedTrinket = Instantiate(trinkets[currentTrinketIndex], instantiatedShip.transform);
+        instantiatedTrinket.transform.position = instantiatedShip.transform.position;
+        trinketScript = instantiatedTrinket.GetComponent<ITrinket>();
         instantiatedGun = Instantiate(guns[currentGunIndex], instantiatedShip.transform.GetChild(0));
         gunScript = instantiatedGun.GetComponent<IGun>();
         started = true;
-        //trinketScript = trinkets[currentTrinketIndex].GetComponent<ITrinket>();
     }
 
     void Update()
@@ -104,11 +109,17 @@ public class InLevelControl : MonoBehaviour
             levelCompletedUI.SetActive(true);
             if (waitRoutine == null)
             {
-                waitRoutine = StartCoroutine(waitABit());    
+                waitRoutine = StartCoroutine(waitABit());   
+                points = timer + destroyedProjectiles + hitVulnerabilities * 10;
+                text[0].text += timer;
+                text[1].text += " " + destroyedProjectiles;
+                text[2].text += " " + hitVulnerabilities;
+                text[3].text += "\n" + points;
             }
             if (!waited) return true;
             if (Input.anyKeyDown)
             {
+                died = false;
                 LoadWorldSelection();
             }
             return true;

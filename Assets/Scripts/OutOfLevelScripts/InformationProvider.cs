@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,7 @@ public class InformationProvider : MonoBehaviour
     [SerializeField] private GameObject pauseUI;
     [SerializeField] private GameObject planetCenter;
     [SerializeField] private GameObject shipPosition;
+    [SerializeField] private TMP_Text[] text;
 
     [SerializeField] private Button tryAgainButton;
 
@@ -34,6 +36,7 @@ public class InformationProvider : MonoBehaviour
         _levelControl.pauseUI = pauseUI;
         _levelControl.planetPosition = planetCenter;
         _levelControl.shipPosition = shipPosition;
+        _levelControl.text = text;
         _levelControl.StartLevel();
         StopCoroutine(startingCoroutine);
     }

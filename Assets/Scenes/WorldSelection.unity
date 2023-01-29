@@ -2036,7 +2036,8 @@ MonoBehaviour:
   - {fileID: 5547575382887373634, guid: bfd0dfd5687d00947a8b4b4a4623bba3, type: 3}
   ships:
   - {fileID: 6819866625338400234, guid: c5716138484166f4ba9d72a7b1f1e882, type: 3}
-  trinkets: []
+  trinkets:
+  - {fileID: 2202551688111599593, guid: 4a911e6df1b683045a78ed290f357148, type: 3}
   instantiatedPlanet: {fileID: 0}
   instantiatedShip: {fileID: 0}
   instantiatedGun: {fileID: 0}
@@ -2046,12 +2047,15 @@ MonoBehaviour:
   levelCompletedUI: {fileID: 0}
   youDiedUI: {fileID: 0}
   pauseUI: {fileID: 0}
+  text: []
   levelCompleted: 0
   died: 0
   autoRestart: 0
   waited: 0
   isInhibited: 0
   rotationSpeed: 5
+  destroyedProjectiles: 0
+  hitVulnerabilities: 0
   gameState: 0
   sceneManagementScript: {fileID: 0}
 --- !u!114 &1968724996

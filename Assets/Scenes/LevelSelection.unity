@@ -268,7 +268,7 @@ GameObject:
   - component: {fileID: 50929111}
   m_Layer: 0
   m_Name: PlanetCenter
-  m_TagString: Untagged
+  m_TagString: PlanetPosition
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1684,7 +1684,7 @@ GameObject:
   - component: {fileID: 1470727604}
   m_Layer: 0
   m_Name: Planet 1
-  m_TagString: PlanetPosition
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1983,7 +1983,7 @@ GameObject:
   - component: {fileID: 1948989323}
   m_Layer: 0
   m_Name: Planet 3
-  m_TagString: PlanetPosition
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2086,7 +2086,7 @@ GameObject:
   - component: {fileID: 2012251226}
   m_Layer: 0
   m_Name: Planet 2
-  m_TagString: PlanetPosition
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

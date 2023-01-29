@@ -30,7 +30,8 @@ public class SceneManagement : MonoBehaviour
             Destroy(gameObject);
         }
         _camera = GameObject.FindGameObjectWithTag("Camera");
-        controller = GameObject.FindGameObjectWithTag("GameMaster").GetComponent<InLevelControl>();
+        var gm = GameObject.FindGameObjectWithTag("GameMaster");
+        controller = gm.GetComponent<InLevelControl>();
     }
 
     public void LoadScene(string sceneName)
@@ -48,6 +49,7 @@ public class SceneManagement : MonoBehaviour
 
     public IEnumerator LeaveScene(string targetScene, RawImage bImage)
     {
+        _camera = GameObject.FindGameObjectWithTag("Camera");
         float alpha = 0f;
         float timer = 0f;
         Debug.Log("Leaving to scene: " + targetScene);
