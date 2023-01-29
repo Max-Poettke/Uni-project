@@ -115,7 +115,7 @@ MonoBehaviour:
   targetTransform: {fileID: 0}
   speed: 15
   armorPenetrationFactor: 1
-  damage: 5
+  damage: 3
   lifeTime: 15
 --- !u!54 &2320865869950058977
 Rigidbody:

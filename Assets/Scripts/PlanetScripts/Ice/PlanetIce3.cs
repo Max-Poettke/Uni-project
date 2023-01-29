@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlanetIce2 : MonoBehaviour, IPlanet
+public class PlanetIce3 : MonoBehaviour, IPlanet
 {
     [SerializeField] private float hp;
     [SerializeField] private float armor;
@@ -25,6 +25,10 @@ public class PlanetIce2 : MonoBehaviour, IPlanet
     private PlanetOverlaps planetOverlaps;
     void Start()
     {
+        standardProjectile.TryGetComponent(out ISplitter splitter);
+        splitter.SetChanceToSplit(0.3f);
+        boulderProjectile.TryGetComponent(out ISplitter splitten);
+        splitten.SetChanceToSplit(1f);
         planetOverlaps = GameObject.FindGameObjectWithTag("GameMaster").GetComponent<PlanetOverlaps>();
         planetOverlaps.planet = gameObject;
         planetOverlaps.planetScript = this;
@@ -43,6 +47,10 @@ public class PlanetIce2 : MonoBehaviour, IPlanet
     public void Die()
     {
         controller.levelCompleted = true;
+        if (vulnerability != null)
+        {
+            Destroy(vulnerability);
+        }
         Destroy(gameObject);
     }
 
@@ -78,18 +86,20 @@ public class PlanetIce2 : MonoBehaviour, IPlanet
     public void OneThird()
     {
         armor++;
-        firingRate -= 0.06f;
-        chanceToSpawnBoulder = 1f / 6f;
+        firingRate -= 0.07f;
         Destroy(vulnerability);
+        chanceToSpawnBoulder = 1f / 6f;
+        StartCoroutine(DeactivateMobility(1f));
         Debug.Log("OneThird called");
     }
 
     public void TwoThirds()
     {
         armor += 2;
-        firingRate -= 0.06f;
+        firingRate -= 0.07f;
         chanceToSpawnBoulder = 2f / 6f;
         Destroy(vulnerability);
+        StartCoroutine(DeactivateMobility(1.5f));
         Debug.Log("TwoThirds called");
     }
     
@@ -102,11 +112,11 @@ public class PlanetIce2 : MonoBehaviour, IPlanet
         }
     }
 
-    public IEnumerator DeactivateMobility()
+    public IEnumerator DeactivateMobility(float duration)
     {
         yield return new WaitForSeconds(1f);
         controller.isInhibited = true;
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(duration);
         controller.isInhibited = false;
     }
 

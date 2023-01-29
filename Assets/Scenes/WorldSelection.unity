@@ -2049,8 +2049,11 @@ MonoBehaviour:
   levelCompleted: 0
   died: 0
   autoRestart: 0
-  rotationSpeed: 0
+  waited: 0
+  isInhibited: 0
+  rotationSpeed: 5
   gameState: 0
+  sceneManagementScript: {fileID: 0}
 --- !u!114 &1968724996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2064,6 +2067,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blackScreen: {fileID: 0}
+  selected: 0
   planets: []
   indicators: []
   cameraObject: {fileID: 0}

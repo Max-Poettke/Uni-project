@@ -142,6 +142,7 @@ GameObject:
   - component: {fileID: 8656372320091245713}
   - component: {fileID: -8509723811887103955}
   - component: {fileID: 7711122223862225194}
+  - component: {fileID: 2562477474808723793}
   m_Layer: 0
   m_Name: Ice-3
   m_TagString: Untagged
@@ -247,3 +248,23 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0.025649548, y: 0.004479766, z: 0.01032944}
+--- !u!114 &2562477474808723793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6925774051847845965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02bcc880fcb108745b5ca4e3b68ea117, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 600
+  armor: 0
+  firingRate: 0.3
+  standardProjectile: {fileID: 7833996121841672716, guid: e90f52aa72403474d9e4d26c8445c7a3, type: 3}
+  boulderProjectile: {fileID: 3825649712785077879, guid: eadacb7c238baef48b78665f29c6467b, type: 3}
+  vulnerabilityPrefab: {fileID: 7870427874595755426, guid: 275653c51d5967b4a9ddf0f180648b42, type: 3}
+  distanceKeeperTransform: {fileID: 7957035780284829551}
+  playerTransform: {fileID: 0}

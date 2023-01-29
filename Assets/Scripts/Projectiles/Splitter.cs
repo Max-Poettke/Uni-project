@@ -1,18 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
-public class StandardIceProjectile : MonoBehaviour, IHp
+public class Splitter : MonoBehaviour, IHp, ISplitter
 {
-    //public GameObject explosionPrefab;
-    private float hp = 5;
-    public float speedMin = 1.5f;
-    public float speedMax = 3f;
-    private float speed = 0f;
-    public float lifeTime = 3f;
+    static float chanceToSplit = 1;
+    private float hp = 2;
+    [SerializeField] private int releasedProjectiles = 8;
+    public float speedMin = 0.5f;
+    public float speedMax = 1.5f;
+    public float speed = 1.3f;
+    public float lifeTime = 2f;
     private float timer = 0f;
     private InLevelControl controller;
+    [SerializeField] private GameObject standardProjectile;
 
+    public void SetChanceToSplit(float chance)
+    {
+        chanceToSplit = chance;
+    }
+    
     void Start()
     {
         controller = GameObject.FindGameObjectWithTag("GameMaster").GetComponent<InLevelControl>();
@@ -59,6 +67,16 @@ public class StandardIceProjectile : MonoBehaviour, IHp
     }
     public void Die()
     {
+        if (Random.Range(0, 1) < chanceToSplit)
+        {
+            for (int i = 0; i < releasedProjectiles; i++)
+            {
+                var inst = Instantiate(standardProjectile);
+                inst.transform.position = transform.position;
+                inst.transform.LookAt(GameObject.FindGameObjectWithTag("Player").transform);
+                inst.transform.Rotate(Random.Range(-180f,180f), 0, 0);
+            }
+        }
         Destroy(gameObject);
     }
     

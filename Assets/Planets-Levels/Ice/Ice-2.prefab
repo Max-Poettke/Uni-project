@@ -131,10 +131,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62fb839c75a8786429f5c27954020bb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 300
+  hp: 400
   armor: 0
   firingRate: 0.3
   standardProjectile: {fileID: 7833996121841672716, guid: e90f52aa72403474d9e4d26c8445c7a3, type: 3}
+  boulderProjectile: {fileID: 3825649712785077879, guid: eadacb7c238baef48b78665f29c6467b, type: 3}
   vulnerabilityPrefab: {fileID: 7870427874595755426, guid: 275653c51d5967b4a9ddf0f180648b42, type: 3}
   distanceKeeperTransform: {fileID: 1039468125578417134}
   playerTransform: {fileID: 0}

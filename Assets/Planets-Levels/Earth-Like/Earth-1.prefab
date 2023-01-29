@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 940245738956179018}
   - component: {fileID: -600440193537583856}
   - component: {fileID: 3713334408810830299}
+  - component: {fileID: 1581292218741266208}
   m_Layer: 0
   m_Name: Earth-1
   m_TagString: Untagged
@@ -32,6 +33,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8699433766973248954}
+  - {fileID: 2792486473500962115}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -119,6 +121,26 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.50000006
   m_Center: {x: -0.007288933, y: -0.016873688, z: -0.033494353}
+--- !u!114 &1581292218741266208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1526925367722177174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60bd7fb05290ae64db6e5b11051bd148, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 600
+  armor: 0
+  firingRate: 0.4
+  standardProjectile: {fileID: 3456107387243647280, guid: 1b2be778d90aedd4486ff9c86b64b720, type: 3}
+  boulderProjectile: {fileID: 2253195892491952490, guid: 6a0c2d9539d95d94f82cd031a32795be, type: 3}
+  vulnerabilityPrefab: {fileID: 8497938283764888631, guid: 0f427e8f0ffb7e749bcb2f3196b10244, type: 3}
+  distanceKeeperTransform: {fileID: 2792486473500962115}
+  playerTransform: {fileID: 0}
 --- !u!1 &1819092460452089623
 GameObject:
   m_ObjectHideFlags: 0
@@ -201,3 +223,33 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &7706685006166022889
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2792486473500962115}
+  m_Layer: 0
+  m_Name: Measurer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2792486473500962115
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7706685006166022889}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.49, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2552383549827842181}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -73,7 +73,6 @@ public class InLevelControl : MonoBehaviour
         instantiatedPlanet.transform.position = planetPosition.transform.position;
         instantiatedPlanet.transform.localScale = planetPosition.transform.localScale;
         instantiatedShip = Instantiate(ships[currentShipIndex]);
-        instantiatedPlanet.GetComponent<Rotatator>().enabled = true;
         shipScript = instantiatedShip.GetComponent<IShip>();
         shipScript.tryGetInfo();
         instantiatedShip.transform.position = shipPosition.transform.position;
@@ -145,6 +144,7 @@ public class InLevelControl : MonoBehaviour
     }
     public void RestartLevel()
     {
+        isInhibited = false;
         died = false;
         firing = false;
         youDiedUI.SetActive(false);
@@ -184,7 +184,7 @@ public class InLevelControl : MonoBehaviour
 
     void rotatePlanet()
     {
-        planet.transform.Rotate(rotationSpeed * rotationDirection * Time.deltaTime);
+        instantiatedPlanet.transform.Rotate(rotationSpeed * rotationDirection * Time.deltaTime);
     }
 
     IEnumerator waitABit()
