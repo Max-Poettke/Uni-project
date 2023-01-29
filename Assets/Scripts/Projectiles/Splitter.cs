@@ -25,6 +25,7 @@ public class Splitter : MonoBehaviour, IHp, ISplitter, ISpeedChangeable
     }
     void Update()
     {
+        if (controller.isPaused) return;
         if (controller.died) return;
         Move();
         Expire();

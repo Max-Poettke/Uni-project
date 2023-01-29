@@ -20,6 +20,7 @@ public class StandardIceProjectile : MonoBehaviour, IHp
     }
     void Update()
     {
+        if (controller.isPaused) return;
         if (controller.died) return;
         Move();
         Expire();

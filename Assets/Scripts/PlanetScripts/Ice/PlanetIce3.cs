@@ -156,7 +156,7 @@ public class PlanetIce3 : MonoBehaviour, IPlanet
                 vulnerability.transform.position = transform.position;
                 float distance = Vector3.Distance(vulnerability.transform.position, distanceKeeperTransform.position);
                 vulnerability.transform.LookAt(playerTransform);
-                vulnerability.transform.Rotate(Random.Range(-35f, 35f), 0f, 0f);
+                vulnerability.transform.Rotate(Random.Range(-35f, 5f), 0f, 0f);
                 vulnerability.transform.position = transform.position + vulnerability.transform.forward * distance;
             }
         }

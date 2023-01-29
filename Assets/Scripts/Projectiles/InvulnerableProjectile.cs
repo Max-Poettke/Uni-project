@@ -18,6 +18,7 @@ public class InvulnerableProjectile : MonoBehaviour, ISpeedChangeable
     }
     void Update()
     {
+        if (controller.isPaused) return;
         if (controller.died) return;
         Move();
         Expire();

@@ -24,6 +24,7 @@ public class StandardProjectile : MonoBehaviour , IMoveable, IKillable
     // Update is called once per frame
     void Update()
     {
+        if (controller.isPaused) return;
         if (controller.died) return;
         Move();
         Expire();

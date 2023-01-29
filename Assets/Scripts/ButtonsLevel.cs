@@ -7,6 +7,7 @@ public class ButtonsLevel : MonoBehaviour
     public void ExitLevel()
     {
         InLevelControl controller = GameObject.FindGameObjectWithTag("GameMaster").GetComponent<InLevelControl>();
+        controller.isPaused = false;
         controller.waited = false;
         controller.enabled = false;
         controller.levelCompleted = false;

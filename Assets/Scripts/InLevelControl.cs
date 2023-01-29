@@ -38,6 +38,7 @@ public class InLevelControl : MonoBehaviour
     public bool waited = false;
     private bool firing = false;
     public bool isInhibited = false;
+    public bool isPaused = false;
     //                                      misc
     [SerializeField] private float rotationSpeed;
     private float timer = 0.0f;
@@ -96,6 +97,7 @@ public class InLevelControl : MonoBehaviour
             if (CheckExceptions()) return;
             timer += Time.deltaTime;
             CheckInputs();
+            if (isPaused) return;
             rotatePlanet();
             shipScript.Move();
         }
@@ -103,6 +105,8 @@ public class InLevelControl : MonoBehaviour
 
     bool CheckExceptions()
     {
+        
+        
         if (levelCompleted)
         {
             //load level information UI
@@ -110,8 +114,8 @@ public class InLevelControl : MonoBehaviour
             if (waitRoutine == null)
             {
                 waitRoutine = StartCoroutine(waitABit());   
-                points = timer + destroyedProjectiles + hitVulnerabilities * 10;
-                text[0].text += timer;
+                points = Mathf.Round(timer + destroyedProjectiles + hitVulnerabilities * 10);
+                text[0].text += Mathf.Round(timer) + "s";
                 text[1].text += " " + destroyedProjectiles;
                 text[2].text += " " + hitVulnerabilities;
                 text[3].text += "\n" + points;
@@ -119,7 +123,10 @@ public class InLevelControl : MonoBehaviour
             if (!waited) return true;
             if (Input.anyKeyDown)
             {
+                isPaused = false;
+                isInhibited = false;
                 died = false;
+                firing = false;
                 LoadWorldSelection();
             }
             return true;
@@ -140,6 +147,7 @@ public class InLevelControl : MonoBehaviour
         {
             return true;
         }
+        
         return false;
     }
 
@@ -149,12 +157,15 @@ public class InLevelControl : MonoBehaviour
         waited = false;
         enabled = false;
         levelCompleted = false;
-        gameObject.GetComponent<WorldSelection>().enabled = true;
+        var ws = gameObject.GetComponent<WorldSelection>();
+        ws.enabled = true;
+        ws.worldIndex = 0;
         sceneManagementScript.LoadScene("WorldSelection");
         
     }
     public void RestartLevel()
     {
+        isPaused = false;
         isInhibited = false;
         died = false;
         firing = false;
@@ -164,15 +175,25 @@ public class InLevelControl : MonoBehaviour
 
     void CheckInputs()
     {
+        
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            //open the menu
+            isPaused = !isPaused;
+            pauseUI.SetActive(!pauseUI.activeSelf);
+        }
+        
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            firing = false;
+        }
+        
+        if (isPaused) return;
+        
         if (Input.GetKeyDown(KeyCode.Space))
         {
             //fire your gun
             firing = true;
-        }
-
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            firing = false;
         }
 
         if (firing)
@@ -186,11 +207,7 @@ public class InLevelControl : MonoBehaviour
             trinketScript.Use();
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            //open the menu
-            pauseUI.SetActive(true);
-        }
+        
     }
 
     void rotatePlanet()
