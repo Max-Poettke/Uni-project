@@ -19,7 +19,7 @@ public class PlanetOverlaps : MonoBehaviour
                 return;
             }
             StopCoroutine(shrinkRoutine);
-            StartCoroutine(ShrinkPlanet(hp, initialHp, initialScale, planetScript.GetPhase()));
+            shrinkRoutine = StartCoroutine(ShrinkPlanet(hp, initialHp, initialScale, planetScript.GetPhase()));
         }
 
         if (hp < (initialHp / 3) && planetScript.GetPhase() == 1)
@@ -44,7 +44,7 @@ public class PlanetOverlaps : MonoBehaviour
                 return;
             }
             StopCoroutine(shrinkRoutine);
-            StartCoroutine(ShrinkPlanet(hp, initialHp, initialScale, planetScript.GetPhase()));
+            shrinkRoutine = StartCoroutine(ShrinkPlanet(hp, initialHp, initialScale, planetScript.GetPhase()));
         }
     }
 

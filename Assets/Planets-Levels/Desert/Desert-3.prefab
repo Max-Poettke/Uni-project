@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 285753603809313178}
   - component: {fileID: -5665950903141951519}
   - component: {fileID: -5147058795913323465}
+  - component: {fileID: 7456177760153187080}
   m_Layer: 0
   m_Name: Desert-3
   m_TagString: Untagged
@@ -117,6 +118,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: -0.0128798485, y: -0.006485492, z: -0.022218376}
+--- !u!114 &7456177760153187080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2002946725102597446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dae8745b8bc82047be0595f6d8fb750, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2670552595445435748
 GameObject:
   m_ObjectHideFlags: 0

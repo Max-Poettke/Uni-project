@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -600440193537583856}
   - component: {fileID: 3713334408810830299}
   - component: {fileID: 1581292218741266208}
+  - component: {fileID: 8015698479726498639}
   m_Layer: 0
   m_Name: Earth-1
   m_TagString: Untagged
@@ -141,6 +142,18 @@ MonoBehaviour:
   vulnerabilityPrefab: {fileID: 8497938283764888631, guid: 0f427e8f0ffb7e749bcb2f3196b10244, type: 3}
   distanceKeeperTransform: {fileID: 2792486473500962115}
   playerTransform: {fileID: 0}
+--- !u!114 &8015698479726498639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1526925367722177174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dae8745b8bc82047be0595f6d8fb750, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1819092460452089623
 GameObject:
   m_ObjectHideFlags: 0

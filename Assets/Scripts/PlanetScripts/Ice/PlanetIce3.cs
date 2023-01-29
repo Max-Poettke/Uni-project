@@ -26,9 +26,16 @@ public class PlanetIce3 : MonoBehaviour, IPlanet
     void Start()
     {
         standardProjectile.TryGetComponent(out ISplitter splitter);
-        splitter.SetChanceToSplit(0.3f);
+        if (splitter != null)
+        {
+            splitter.SetChanceToSplit(0.3f);    
+        }
+        
         boulderProjectile.TryGetComponent(out ISplitter splitten);
-        splitten.SetChanceToSplit(1f);
+        if (splitten != null)
+        {
+            splitten.SetChanceToSplit(0.3f);    
+        }
         planetOverlaps = GameObject.FindGameObjectWithTag("GameMaster").GetComponent<PlanetOverlaps>();
         planetOverlaps.planet = gameObject;
         planetOverlaps.planetScript = this;

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3046010245514240642}
   - component: {fileID: -7061108999557615132}
   - component: {fileID: -2456652215793574986}
+  - component: {fileID: -868292526107533860}
   m_Layer: 0
   m_Name: Alien 3
   m_TagString: Untagged
@@ -117,6 +118,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0.0021152496, y: 0.008529067, z: -0.032046095}
+--- !u!114 &-868292526107533860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3637021886203926110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dae8745b8bc82047be0595f6d8fb750, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6212137143535609785
 GameObject:
   m_ObjectHideFlags: 0

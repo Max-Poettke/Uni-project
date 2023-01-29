@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 6536382184323452438}
   - component: {fileID: 5824362185949061142}
   - component: {fileID: -7925698450892174854}
+  - component: {fileID: -2395047461339999343}
   m_Layer: 0
   m_Name: Earth-2
   m_TagString: Untagged
@@ -202,6 +203,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: -0.004739523, y: -0.017646074, z: -0.027421609}
+--- !u!114 &-2395047461339999343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4794419334369295050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dae8745b8bc82047be0595f6d8fb750, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6753237575152826586
 GameObject:
   m_ObjectHideFlags: 0

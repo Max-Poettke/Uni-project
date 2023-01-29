@@ -102,14 +102,6 @@ public class PlanetIce2 : MonoBehaviour, IPlanet
         }
     }
 
-    public IEnumerator DeactivateMobility()
-    {
-        yield return new WaitForSeconds(1f);
-        controller.isInhibited = true;
-        yield return new WaitForSeconds(1.5f);
-        controller.isInhibited = false;
-    }
-
     public IEnumerator InstantiateVulnerability()
     {
         while (!controller.died)
