@@ -139,6 +139,7 @@ MonoBehaviour:
   boulderProjectile: {fileID: 3825649712785077879, guid: eadacb7c238baef48b78665f29c6467b, type: 3}
   vulnerabilityPrefab: {fileID: 7870427874595755426, guid: 275653c51d5967b4a9ddf0f180648b42, type: 3}
   distanceKeeperTransform: {fileID: 1039468125578417134}
+  defaultProjectileSpeed: 2.5
   playerTransform: {fileID: 0}
 --- !u!114 &1511951373319487382
 MonoBehaviour:

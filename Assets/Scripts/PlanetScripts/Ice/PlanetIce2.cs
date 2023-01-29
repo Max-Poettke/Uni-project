@@ -11,7 +11,9 @@ public class PlanetIce2 : MonoBehaviour, IPlanet
     [SerializeField] private GameObject boulderProjectile;
     [SerializeField] private GameObject vulnerabilityPrefab;
     [SerializeField] private Transform distanceKeeperTransform;
+    [SerializeField] private float defaultProjectileSpeed;
 
+    private bool isWave = false;
     private float chanceToSpawnBoulder = 0;
     private float initialScale;
     private float initialHp;
@@ -69,6 +71,19 @@ public class PlanetIce2 : MonoBehaviour, IPlanet
         {
             projectile = Instantiate(standardProjectile);    
         }
+        
+        projectile.TryGetComponent(out ISpeedChangeable speedChangeable);
+        if (speedChangeable != null)
+        {
+            if (isWave)
+            {
+                speedChangeable.SetSpeed(defaultProjectileSpeed);
+            }
+            else
+            {
+                speedChangeable.SetSpeed(defaultProjectileSpeed - 0.5f, defaultProjectileSpeed + 0.5f);
+            }
+        }
         projectile.transform.position = transform.position;
         projectile.transform.LookAt(playerTransform.position);
         float rand = Random.Range(-40, 40);
@@ -112,6 +127,7 @@ public class PlanetIce2 : MonoBehaviour, IPlanet
                 vulnerability = Instantiate(vulnerabilityPrefab);
                 var vScript = vulnerability.GetComponent<Vulnerability>();
                 vScript.planet = this;
+                vulnerability.transform.parent = gameObject.transform;
                 vulnerability.transform.position = transform.position;
                 float distance = Vector3.Distance(vulnerability.transform.position, distanceKeeperTransform.position);
                 vulnerability.transform.LookAt(playerTransform);

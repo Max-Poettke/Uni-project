@@ -11,11 +11,13 @@ public class PlanetEarth1 : MonoBehaviour, IPlanet
     [SerializeField] private GameObject boulderProjectile;
     [SerializeField] private GameObject vulnerabilityPrefab;
     [SerializeField] private Transform distanceKeeperTransform;
+    [SerializeField] private float defaultProjectileSpeed;
 
     private float chanceToSpawnBoulder = 0;
     private float initialScale;
     private float initialHp;
     private int phase = 0;
+    private bool isWave = false;
     public Transform playerTransform;
     private GameObject vulnerability;
 
@@ -63,7 +65,6 @@ public class PlanetEarth1 : MonoBehaviour, IPlanet
 
     public void FireProjectile()
     {
-        Debug.Log(chanceToSpawnBoulder);
         if (controller.died) return;
         GameObject projectile;
         if (Random.Range(0f, 1f) < chanceToSpawnBoulder)
@@ -73,6 +74,19 @@ public class PlanetEarth1 : MonoBehaviour, IPlanet
         else
         {
             projectile = Instantiate(standardProjectile);    
+        }
+
+        projectile.TryGetComponent(out ISpeedChangeable speedChangeable);
+        if (speedChangeable != null)
+        {
+            if (isWave)
+            {
+                speedChangeable.SetSpeed(defaultProjectileSpeed);
+            }
+            else
+            {
+                speedChangeable.SetSpeed(defaultProjectileSpeed - 0.5f, defaultProjectileSpeed + 0.5f);
+            }
         }
         projectile.transform.position = transform.position;
         projectile.transform.LookAt(playerTransform.position);
@@ -86,7 +100,7 @@ public class PlanetEarth1 : MonoBehaviour, IPlanet
         firingRate -= 0.07f;
         chanceToSpawnBoulder = 1f / 6f;
         Destroy(vulnerability);
-        SpawnWave(15);
+        SpawnWave(8);
         Debug.Log("OneThird called");
     }
 
@@ -96,7 +110,7 @@ public class PlanetEarth1 : MonoBehaviour, IPlanet
         firingRate -= 0.07f;
         chanceToSpawnBoulder = 2f / 6f;
         Destroy(vulnerability);
-        SpawnWave(30);
+        SpawnWave(15);
         Debug.Log("TwoThirds called");
     }
     
@@ -111,11 +125,13 @@ public class PlanetEarth1 : MonoBehaviour, IPlanet
 
     public void SpawnWave(int amount)
     {
+        isWave = true;
         while (amount > 0)
         {
             FireProjectile();
             amount--;
         }
+        isWave = false;
     }
 
     public IEnumerator InstantiateVulnerability()
@@ -128,10 +144,11 @@ public class PlanetEarth1 : MonoBehaviour, IPlanet
                 vulnerability = Instantiate(vulnerabilityPrefab);
                 var vScript = vulnerability.GetComponent<Vulnerability>();
                 vScript.planet = this;
+                vulnerability.transform.parent = gameObject.transform;
                 vulnerability.transform.position = transform.position;
                 float distance = Vector3.Distance(vulnerability.transform.position, distanceKeeperTransform.position);
                 vulnerability.transform.LookAt(playerTransform);
-                vulnerability.transform.Rotate(Random.Range(-35f, 35f), 0f, 0f);
+                vulnerability.transform.Rotate(Random.Range(-35f, 5f), 0f, 0f);
                 vulnerability.transform.position = transform.position + vulnerability.transform.forward * distance;
             }
         }

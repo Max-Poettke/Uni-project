@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class Splitter : MonoBehaviour, IHp, ISplitter
+public class Splitter : MonoBehaviour, IHp, ISplitter, ISpeedChangeable
 {
     static float chanceToSplit = 1;
     private float hp = 2;
     [SerializeField] private int releasedProjectiles = 8;
-    public float speedMin = 0.5f;
-    public float speedMax = 1.5f;
-    public float speed = 1.3f;
+    private float speed = 1.3f;
     public float lifeTime = 2f;
     private float timer = 0f;
     private InLevelControl controller;
@@ -24,7 +22,6 @@ public class Splitter : MonoBehaviour, IHp, ISplitter
     void Start()
     {
         controller = GameObject.FindGameObjectWithTag("GameMaster").GetComponent<InLevelControl>();
-        speed = Random.Range(speedMin, speedMax);
     }
     void Update()
     {
@@ -72,6 +69,10 @@ public class Splitter : MonoBehaviour, IHp, ISplitter
             for (int i = 0; i < releasedProjectiles; i++)
             {
                 var inst = Instantiate(standardProjectile);
+                if (inst.TryGetComponent(out ISpeedChangeable speedChangeable))
+                {
+                    speedChangeable.SetSpeed(speed);
+                }
                 inst.transform.position = transform.position;
                 inst.transform.LookAt(GameObject.FindGameObjectWithTag("Player").transform);
                 inst.transform.Rotate(Random.Range(-180f,180f), 0, 0);
@@ -88,4 +89,16 @@ public class Splitter : MonoBehaviour, IHp, ISplitter
             Die();
         }
     }
+    
+    public void SetSpeed(float newSpeed)
+    {
+        speed = newSpeed;
+    }
+    
+    public void SetSpeed(float minSpeed, float maxSpeed)
+    {
+        speed = Random.Range(minSpeed, maxSpeed);
+    }
+    
+    public float GetSpeed(){return speed;}
 }

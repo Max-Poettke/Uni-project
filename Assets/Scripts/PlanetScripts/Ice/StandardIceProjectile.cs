@@ -5,10 +5,10 @@ using UnityEngine;
 public class StandardIceProjectile : MonoBehaviour, IHp
 {
     //public GameObject explosionPrefab;
-    private float hp = 5;
+    public float hp = 5;
     public float speedMin = 1.5f;
     public float speedMax = 3f;
-    private float speed = 0f;
+    public float speed = 0f;
     public float lifeTime = 3f;
     private float timer = 0f;
     private InLevelControl controller;

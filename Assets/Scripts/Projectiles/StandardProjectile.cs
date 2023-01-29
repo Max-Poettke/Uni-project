@@ -72,6 +72,7 @@ public class StandardProjectile : MonoBehaviour , IMoveable, IKillable
         {
             //collision detection for projectiles
             other.TryGetComponent(out IHp killableProjectile);
+            if (killableProjectile == null) return;
             killableProjectile.TakeDamage(1,0);
             hp--;
             if (hp == 0)
