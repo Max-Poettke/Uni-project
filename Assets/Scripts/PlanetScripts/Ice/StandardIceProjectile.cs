@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StandardIceProjectile : MonoBehaviour
+public class StandardIceProjectile : MonoBehaviour, IHp
 {
     //public GameObject explosionPrefab;
+    private float hp = 5;
     public float speed = 2f;
     public float lifeTime = 3f;
     private float timer = 0f;
@@ -44,6 +45,15 @@ public class StandardIceProjectile : MonoBehaviour
             Die();
         }
     }
+
+    public void TakeDamage(float damage, float armorPenetrationFactor)
+    {
+        hp -= damage;
+        if (hp <= 0)
+        {
+            Die();
+        }
+    }
     public void Die()
     {
         Destroy(gameObject);
@@ -51,7 +61,6 @@ public class StandardIceProjectile : MonoBehaviour
     
     void OnTriggerEnter(Collider col)
     {
-        Debug.Log("collision detected");
         if(col.TryGetComponent(out IShip player))
         {
             player.Die();

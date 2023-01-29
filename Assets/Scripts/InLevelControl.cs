@@ -33,8 +33,9 @@ public class InLevelControl : MonoBehaviour
     public bool died = false;
     public bool autoRestart = false;
     private bool started = false;
-    private bool waited = false;
+    public bool waited = false;
     private bool firing = false;
+    public bool isInhibited = false;
     //                                      misc
     [SerializeField] private float rotationSpeed;
     private float timer = 0.0f;
@@ -45,7 +46,7 @@ public class InLevelControl : MonoBehaviour
     //                                      references
     private Planet planetScript;
     public SceneManagement.GameStates gameState;
-    private SceneManagement sceneManagementScript;
+    public SceneManagement sceneManagementScript;
 
     void Awake()
     {
@@ -109,11 +110,7 @@ public class InLevelControl : MonoBehaviour
             if (!waited) return true;
             if (Input.anyKeyDown)
             {
-                waited = false;
-                enabled = false;
-                levelCompleted = false;
-                gameObject.GetComponent<WorldSelection>().enabled = true;
-                sceneManagementScript.LoadScene("WorldSelection");
+                LoadWorldSelection();
             }
             return true;
         }
@@ -128,9 +125,24 @@ public class InLevelControl : MonoBehaviour
             youDiedUI.SetActive(true);
             return true;
         }
+
+        if (isInhibited)
+        {
+            return true;
+        }
         return false;
     }
 
+
+    public void LoadWorldSelection()
+    {
+        waited = false;
+        enabled = false;
+        levelCompleted = false;
+        gameObject.GetComponent<WorldSelection>().enabled = true;
+        sceneManagementScript.LoadScene("WorldSelection");
+        
+    }
     public void RestartLevel()
     {
         died = false;

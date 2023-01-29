@@ -119,6 +119,7 @@ public class WorldSelection : MonoBehaviour
         //Debug.Log(worldIndex);
         //Debug.Log(planetsWhole[worldIndex]);
         levelSelectionScript.planets = planetsWhole[worldIndex];
+        levelSelectionScript.selected = 0;
         levelSelectionScript.indicators = new GameObject[3];
         levelSelectionScript.enabled = true;
     }

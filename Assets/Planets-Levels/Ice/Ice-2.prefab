@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5315796832413379169}
   - component: {fileID: -3315279639418224546}
   - component: {fileID: -1753322552903641507}
+  - component: {fileID: 7727095917729868242}
   m_Layer: 0
   m_Name: Ice-2
   m_TagString: Untagged
@@ -32,6 +33,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1307508210149064581}
+  - {fileID: 1039468125578417134}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -117,6 +119,55 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: -0.027405739, y: -0.0076696873, z: -0.0414176}
+--- !u!114 &7727095917729868242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5906848055389806269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62fb839c75a8786429f5c27954020bb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 300
+  armor: 0
+  firingRate: 0.3
+  standardProjectile: {fileID: 7833996121841672716, guid: e90f52aa72403474d9e4d26c8445c7a3, type: 3}
+  vulnerabilityPrefab: {fileID: 7870427874595755426, guid: 275653c51d5967b4a9ddf0f180648b42, type: 3}
+  distanceKeeperTransform: {fileID: 1039468125578417134}
+  playerTransform: {fileID: 0}
+--- !u!1 &7758011919748142493
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1039468125578417134}
+  m_Layer: 0
+  m_Name: DistanceKeeper
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1039468125578417134
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7758011919748142493}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.53, y: -0.0076696873, z: -0.0414176}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7467547463145073838}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8880978887306003892
 GameObject:
   m_ObjectHideFlags: 0

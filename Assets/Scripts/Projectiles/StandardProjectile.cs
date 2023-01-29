@@ -5,6 +5,7 @@ using UnityEngine;
 public class StandardProjectile : MonoBehaviour , IMoveable, IKillable
 {
     //public GameObject explosionPrefab;
+    private int hp = 3;
     public GameObject explosionPrefab;
     public Transform targetTransform;
     public float speed = 2f;
@@ -53,12 +54,29 @@ public class StandardProjectile : MonoBehaviour , IMoveable, IKillable
     }
     public void Die()
     {
-        Destroy(this.gameObject);
+        Destroy(gameObject);
     }
     
     
     void OnTriggerEnter(Collider other)
     {
+        if (other.CompareTag("Vulnerability"))
+        {
+            other.GetComponent<Vulnerability>().TakeDamage(damage, armorPenetrationFactor);
+        }
+        
+        if (other.gameObject.transform.CompareTag("Projectile"))
+        {
+            other.TryGetComponent(out IHp killableProjectile);
+            killableProjectile.TakeDamage(1,0);
+            hp--;
+            if (hp == 0)
+            {
+                Die();
+            }
+            return;
+        }
+        
         if(other.TryGetComponent(out IHp killableObject))
         {
             Instantiate(explosionPrefab, transform.position, transform.rotation);

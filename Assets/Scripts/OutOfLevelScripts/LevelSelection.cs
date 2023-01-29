@@ -7,14 +7,12 @@ public class LevelSelection : MonoBehaviour
 {
     public RawImage blackScreen;
     private SceneManagement sceneManagementScript;
-    private int selected = 0;
+    public int selected = 0;
     public GameObject [] planets;
     public GameObject[] indicators;
     public GameObject cameraObject;
     private Coroutine selectionCoroutine;
     private InLevelControl controlScript;
-    
-    
 
     void Start()
     {

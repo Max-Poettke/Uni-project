@@ -75,7 +75,7 @@ public class StandardShip : MonoBehaviour, IShip
             inLevelControlScript = GameObject.FindGameObjectWithTag("GameMaster").GetComponent<InLevelControl>();
         }
         
-        planet = inLevelControlScript.planet.transform;
+        planet = inLevelControlScript.instantiatedPlanet.transform;
         _camera = Camera.main;
         foundTargetPlanet = true;
     }

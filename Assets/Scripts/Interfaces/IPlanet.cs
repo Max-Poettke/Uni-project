@@ -5,5 +5,8 @@ using UnityEngine;
 public interface IPlanet : IHp
 {
     void FireProjectile();
-    void Shrink();
+    void SetPhase(int i);
+    int GetPhase();
+    void OneThird();
+    void TwoThirds();
 }

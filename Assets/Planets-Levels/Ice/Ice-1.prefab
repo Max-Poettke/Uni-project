@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 582234298528557665}
   - component: {fileID: 6568511503532299928}
   - component: {fileID: 4611108003991008653}
-  - component: {fileID: 9036791649107171260}
   - component: {fileID: -8072389996962029549}
+  - component: {fileID: 9036791649107171260}
   m_Layer: 0
   m_Name: Ice-1
   m_TagString: Untagged
@@ -105,6 +105,19 @@ MonoBehaviour:
   randomize: 0
   maxSpeed: 0
   minSpeed: 0
+--- !u!135 &-8072389996962029549
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4833730628615545412}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5000005
+  m_Center: {x: 0.0050139427, y: 0.0045300126, z: -0.0035740286}
 --- !u!114 &9036791649107171260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,19 +135,6 @@ MonoBehaviour:
   firingRate: 0.3
   standardProjectile: {fileID: 7833996121841672716, guid: e90f52aa72403474d9e4d26c8445c7a3, type: 3}
   playerTransform: {fileID: 0}
---- !u!135 &-8072389996962029549
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4833730628615545412}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5000005
-  m_Center: {x: 0.0050139427, y: 0.0045300126, z: -0.0035740286}
 --- !u!1 &7824719193037464177
 GameObject:
   m_ObjectHideFlags: 0

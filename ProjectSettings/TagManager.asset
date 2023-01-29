@@ -12,6 +12,7 @@ TagManager:
   - LevelSelector
   - BlackScreen
   - PlanetPosition
+  - Vulnerability
   layers:
   - Default
   - TransparentFX

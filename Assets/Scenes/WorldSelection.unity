@@ -1959,6 +1959,7 @@ GameObject:
   - component: {fileID: 1968724993}
   - component: {fileID: 1968724995}
   - component: {fileID: 1968724996}
+  - component: {fileID: 1968724997}
   m_Layer: 0
   m_Name: GameMaster
   m_TagString: GameMaster
@@ -2066,6 +2067,19 @@ MonoBehaviour:
   planets: []
   indicators: []
   cameraObject: {fileID: 0}
+--- !u!114 &1968724997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1968724992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23217106f2635a94ca919a727ba60a32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  planet: {fileID: 0}
 --- !u!1 &2014138924
 GameObject:
   m_ObjectHideFlags: 0
