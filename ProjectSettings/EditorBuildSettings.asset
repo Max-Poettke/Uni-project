@@ -15,12 +15,6 @@ EditorBuildSettings:
     path: Assets/Scenes/LevelSelection.unity
     guid: 7e8a9b24a29fc3544897b2034afac781
   - enabled: 1
-    path: Assets/Scenes/ShipModification.unity
-    guid: dcd22e71c7d4f2442a653589eafda35b
-  - enabled: 1
     path: Assets/Scenes/LevelScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 0
-    path: Assets/Scenes/Spacehooter 03.unity
-    guid: 16cf23da0d5de91488e3b2c01a8a898c
   m_configObjects: {}

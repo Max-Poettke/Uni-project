@@ -63,6 +63,11 @@ public class WorldSelection : MonoBehaviour
             leaveRoutine = StartCoroutine(sceneManagementScript.LeaveScene("MainMenu", blackScreen));
             
         }
+
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            
+        }
         
         if (Input.GetKeyDown(KeyCode.A))
         {

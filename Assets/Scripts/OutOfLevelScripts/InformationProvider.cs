@@ -13,11 +13,14 @@ public class InformationProvider : MonoBehaviour
     [SerializeField] private GameObject planetCenter;
     [SerializeField] private GameObject shipPosition;
     [SerializeField] private TMP_Text[] text;
+    [SerializeField] private Slider slider;
+    [SerializeField] private TMP_Text pointText;
 
     [SerializeField] private Button tryAgainButton;
 
     private Coroutine startingCoroutine;
     private InLevelControl _levelControl;
+    private IPlanet planetControl;
     private void Awake()
     {
         startingCoroutine = StartCoroutine(TryGetGameMaster());
@@ -37,6 +40,8 @@ public class InformationProvider : MonoBehaviour
         _levelControl.planetPosition = planetCenter;
         _levelControl.shipPosition = shipPosition;
         _levelControl.text = text;
+        _levelControl.slider = slider;
+        _levelControl.pointText = pointText;
         _levelControl.StartLevel();
         StopCoroutine(startingCoroutine);
     }

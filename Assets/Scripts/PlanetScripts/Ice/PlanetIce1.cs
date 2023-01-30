@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlanetIce1 : MonoBehaviour, IPlanet, IHp
 {
@@ -8,7 +9,8 @@ public class PlanetIce1 : MonoBehaviour, IPlanet, IHp
     [SerializeField] private float armor;
     [SerializeField] private float firingRate = 0.0f;
     [SerializeField] private GameObject standardProjectile;
-    
+
+    public Slider slider;
     private float initialScale;
     private float initialHp;
     private int phase = 0;
@@ -46,6 +48,7 @@ public class PlanetIce1 : MonoBehaviour, IPlanet, IHp
             damage *= armorPenetrationFactor / armor;
         }
         hp -= damage;
+        slider.value = hp;
         planetOverlaps.Shrink(hp, initialHp, initialScale);
     }
 
@@ -82,6 +85,13 @@ public class PlanetIce1 : MonoBehaviour, IPlanet, IHp
         }
     }
 
+    public void SetSlider(Slider nSlider)
+    {
+        slider = nSlider;
+        slider.minValue = 0f;
+        slider.maxValue = hp;
+        slider.value = slider.maxValue;
+    }
     public void SetPhase(int i) { phase = i; }
     public int GetPhase(){return phase;}
 }

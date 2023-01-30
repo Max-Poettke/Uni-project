@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlanetIce3 : MonoBehaviour, IPlanet
 {
@@ -13,6 +14,7 @@ public class PlanetIce3 : MonoBehaviour, IPlanet
     [SerializeField] private Transform distanceKeeperTransform;
     [SerializeField] private float defaultProjectileSpeed;
 
+    private Slider slider;
     private bool isWave = false;
     private float chanceToSpawnBoulder = 0;
     private float initialScale;
@@ -70,6 +72,7 @@ public class PlanetIce3 : MonoBehaviour, IPlanet
             damage *= armorPenetrationFactor / armor;
         }
         hp -= damage;
+        slider.value = hp;
         planetOverlaps.Shrink(hp, initialHp, initialScale);
     }
 
@@ -162,6 +165,13 @@ public class PlanetIce3 : MonoBehaviour, IPlanet
         }
     }
 
+    public void SetSlider(Slider nSlider)
+    {
+        slider = nSlider;
+        slider.minValue = 0f;
+        slider.maxValue = hp;
+        slider.value = hp;
+    }
     public void SetPhase(int i) { phase = i; }
     public int GetPhase(){return phase;}
 }

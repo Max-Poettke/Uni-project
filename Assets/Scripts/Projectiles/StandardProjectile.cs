@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using UnityEngine;
 
 public class StandardProjectile : MonoBehaviour , IMoveable, IKillable
@@ -14,7 +15,6 @@ public class StandardProjectile : MonoBehaviour , IMoveable, IKillable
     public float lifeTime = 2f;
     private float lifeTimer = 0f;
     private InLevelControl controller;
-    private static Coroutine shakeRoutine;
 
     void Start()
     {
@@ -99,8 +99,6 @@ public class StandardProjectile : MonoBehaviour , IMoveable, IKillable
             killableObject.TakeDamage(damage, armorPenetrationFactor);
             Die();
         }
-
-        
     }
     
     

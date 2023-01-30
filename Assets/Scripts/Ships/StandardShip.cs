@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class StandardShip : MonoBehaviour, IShip
+public class StandardShip : MonoBehaviour, IShip, IUnlockeable
 {
     private Camera _camera;
     public Transform planet;
@@ -13,6 +13,9 @@ public class StandardShip : MonoBehaviour, IShip
     [SerializeField] 
     private float rotationSpeed = 30f;
     public bool isMoving = false;
+
+    private bool isUnlocked = true;
+    private float unlockPrice = 100f;
 
     public void Move()
     {
@@ -92,6 +95,16 @@ public class StandardShip : MonoBehaviour, IShip
             result = false;
         }
         return result;
+    }
+
+    public void SetUnlocked()
+    {
+        return;
+    }
+
+    public bool GetUnlocked()
+    {
+        return isUnlocked;
     }
     
     /*

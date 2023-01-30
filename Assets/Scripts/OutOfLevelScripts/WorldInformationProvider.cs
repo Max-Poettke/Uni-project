@@ -12,6 +12,7 @@ public class WorldInformationProvider : MonoBehaviour
     [SerializeField] private GameObject[] text;
 
     private WorldSelection wSelection;
+    private ShopKeep shopKeep;
     private Coroutine startingCoroutine;
     void Awake()
     {
@@ -22,7 +23,9 @@ public class WorldInformationProvider : MonoBehaviour
     {
         while (wSelection == null)
         {
-            wSelection = GameObject.FindGameObjectWithTag("GameMaster").GetComponent<WorldSelection>();
+            GameObject gm = GameObject.FindGameObjectWithTag("GameMaster"); 
+            wSelection = gm.GetComponent<WorldSelection>();
+            shopKeep = gm.GetComponent<ShopKeep>();
             yield return new WaitForFixedUpdate();
         }
 
@@ -31,6 +34,8 @@ public class WorldInformationProvider : MonoBehaviour
         wSelection.cameraObject = cameraObject;
         wSelection.blackScreen = blackScreen;
         wSelection.text = text;
+        
+        
         StopCoroutine(startingCoroutine);
     }
 }
