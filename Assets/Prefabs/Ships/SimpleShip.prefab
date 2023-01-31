@@ -229,6 +229,7 @@ GameObject:
   - component: {fileID: 5018686603564547135}
   - component: {fileID: 5936977144455061688}
   - component: {fileID: -8674274490361382180}
+  - component: {fileID: 549325218631388964}
   m_Layer: 0
   m_Name: SimpleShip
   m_TagString: Player
@@ -331,6 +332,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.1660193, y: 0.88070595, z: 5.4124517}
   m_Center: {x: -0.0058645653, y: 0.07515828, z: 0.58097035}
+--- !u!114 &549325218631388964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6819866625338400234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dae8745b8bc82047be0595f6d8fb750, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8281966103505166240
 GameObject:
   m_ObjectHideFlags: 0

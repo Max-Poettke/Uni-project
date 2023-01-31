@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: -6755059270523094771}
   - component: {fileID: -3249898994263205569}
   - component: {fileID: -8567038762232265225}
+  - component: {fileID: 3982771377670292158}
   m_Layer: 0
   m_Name: Desert-1
   m_TagString: Untagged
@@ -212,3 +213,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dae8745b8bc82047be0595f6d8fb750, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3982771377670292158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7503032724102492709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16f0b53b320bf09418ae8142b31dcd52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 200
+  armor: 0
+  firingRate: 0.5
+  standardProjectile: {fileID: 7833996121841672716, guid: d546d7fcf06afec4eb33140a9c2cb2e1, type: 3}
+  empProjectile: {fileID: 7833996121841672716, guid: 220bd76947199f4499c2c4c9a3d6647f, type: 3}
+  slider: {fileID: 0}
+  playerTransform: {fileID: 0}

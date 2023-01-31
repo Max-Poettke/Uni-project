@@ -199,7 +199,7 @@ public class InLevelControl : MonoBehaviour
             firing = true;
         }
 
-        if (firing)
+        if (firing && !shipScript.IsStunned)
         {
             gunScript.Fire();
         }

@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class StandardShip : MonoBehaviour, IShip, IUnlockeable
@@ -16,6 +17,9 @@ public class StandardShip : MonoBehaviour, IShip, IUnlockeable
 
     private bool isUnlocked = true;
     private float unlockPrice = 100f;
+
+    private bool isStunned;
+    private float stunnedUntil;
 
     public void Move()
     {
@@ -60,6 +64,13 @@ public class StandardShip : MonoBehaviour, IShip, IUnlockeable
         }
 
         Vector3 pos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+
+        if (isStunned && stunnedUntil > Time.time)
+        {
+            return;
+        }
+
+        isStunned = false;
         transform.position += transform.up * amtToMoveX;
         transform.RotateAround(planet.position, planet.forward, -amtToMoveY);
         if (!CheckWithinBounds(amtToMoveX, amtToMoveY)) transform.position = pos;
@@ -70,6 +81,14 @@ public class StandardShip : MonoBehaviour, IShip, IUnlockeable
         inLevelControlScript.died = true;
         Destroy(gameObject);
     }
+
+    public void Stun(float duration)
+    {
+        isStunned = true;
+        stunnedUntil = Time.time + duration;
+    }
+
+    public bool IsStunned => isStunned;
 
     public void tryGetInfo()
     {
