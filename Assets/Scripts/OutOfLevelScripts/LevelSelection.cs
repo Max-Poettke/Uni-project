@@ -35,6 +35,7 @@ public class LevelSelection : MonoBehaviour
             var ws = GetComponent<WorldSelection>();
             ws.enabled = true;
             ws.worldIndex = 0;
+            ws.targetRotationY = 0;
             sceneManagementScript.LoadScene("WorldSelection");
         }
         

@@ -61,7 +61,7 @@ public class StandardEnergyProjectile : MonoBehaviour, IHp
 
     public void TakeDamage(float damage, float armorPenetrationFactor)
     {
-        // Indistructible
+        // Indistructible :)
     }
     public void Die()
     {

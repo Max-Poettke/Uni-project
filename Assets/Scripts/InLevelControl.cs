@@ -72,19 +72,32 @@ public class InLevelControl : MonoBehaviour
         sceneManagementScript = GameObject.FindGameObjectWithTag("SceneManager").GetComponent<SceneManagement>();
         shopKeepScript = GetComponent<ShopKeep>();
         rotationDirection = transform.forward;
-        gunScript = gun.GetComponent<IGun>();
+
+        //instantiate the planet
         instantiatedPlanet = Instantiate(planet);
         instantiatedPlanet.transform.position = planetPosition.transform.position;
         instantiatedPlanet.transform.localScale = planetPosition.transform.localScale;
-        instantiatedPlanet.GetComponent<IPlanet>().SetSlider(slider);
+        if (instantiatedPlanet.TryGetComponent(out IPlanet planetScript))
+        {
+            planetScript.SetSlider(slider);
+        }
+        
+        //instantiate the ship
         instantiatedShip = Instantiate(ship);
         shipScript = instantiatedShip.GetComponent<IShip>();
         shipScript.tryGetInfo();
         instantiatedShip.transform.position = shipPosition.transform.position;
         instantiatedShip.transform.localScale = shipPosition.transform.localScale;
-        instantiatedTrinket = Instantiate(trinket, instantiatedShip.transform);
-        instantiatedTrinket.transform.position = instantiatedShip.transform.position;
-        trinketScript = instantiatedTrinket.GetComponent<ITrinket>();
+        
+        //instantiate the trinket
+        if (trinket != null)
+        {
+            instantiatedTrinket = Instantiate(trinket, instantiatedShip.transform);
+            instantiatedTrinket.transform.position = instantiatedShip.transform.position;
+            trinketScript = instantiatedTrinket.GetComponent<ITrinket>();
+        }
+        
+        //instantiate the gun
         instantiatedGun = Instantiate(gun, instantiatedShip.transform.GetChild(0));
         gunScript = instantiatedGun.GetComponent<IGun>();
         points = 0;
@@ -199,7 +212,7 @@ public class InLevelControl : MonoBehaviour
             firing = true;
         }
 
-        if (firing && !shipScript.IsStunned)
+        if (firing)
         {
             gunScript.Fire();
         }
@@ -207,6 +220,7 @@ public class InLevelControl : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.E))
         {
             //use your trinket
+            if (trinketScript == null) return;
             trinketScript.Use();
         }
 

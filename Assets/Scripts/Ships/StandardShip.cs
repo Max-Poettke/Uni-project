@@ -1,7 +1,8 @@
 using JetBrains.Annotations;
 using UnityEngine;
+using System.Collections;
 
-public class StandardShip : MonoBehaviour, IShip, IUnlockeable
+public class StandardShip : MonoBehaviour, IShip
 {
     private Camera _camera;
     public Transform planet;
@@ -14,12 +15,6 @@ public class StandardShip : MonoBehaviour, IShip, IUnlockeable
     [SerializeField] 
     private float rotationSpeed = 30f;
     public bool isMoving = false;
-
-    private bool isUnlocked = true;
-    private float unlockPrice = 100f;
-
-    private bool isStunned;
-    private float stunnedUntil;
 
     public void Move()
     {
@@ -64,13 +59,6 @@ public class StandardShip : MonoBehaviour, IShip, IUnlockeable
         }
 
         Vector3 pos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-
-        if (isStunned && stunnedUntil > Time.time)
-        {
-            return;
-        }
-
-        isStunned = false;
         transform.position += transform.up * amtToMoveX;
         transform.RotateAround(planet.position, planet.forward, -amtToMoveY);
         if (!CheckWithinBounds(amtToMoveX, amtToMoveY)) transform.position = pos;
@@ -82,13 +70,14 @@ public class StandardShip : MonoBehaviour, IShip, IUnlockeable
         Destroy(gameObject);
     }
 
-    public void Stun(float duration)
-    {
-        isStunned = true;
-        stunnedUntil = Time.time + duration;
-    }
 
-    public bool IsStunned => isStunned;
+    public IEnumerator Stun(float duration)
+    {
+        yield return new WaitForSeconds(1f);
+        inLevelControlScript.isInhibited = true;
+        yield return new WaitForSeconds(duration);
+        inLevelControlScript.isInhibited = false;
+    }
 
     public void tryGetInfo()
     {
@@ -116,16 +105,16 @@ public class StandardShip : MonoBehaviour, IShip, IUnlockeable
         return result;
     }
 
+    public float GetPrice()
+    {
+        throw new System.NotImplementedException();
+    }
+
     public void SetUnlocked()
     {
         return;
     }
 
-    public bool GetUnlocked()
-    {
-        return isUnlocked;
-    }
-    
     /*
     private IEnumerator DestroyShip()
     {

@@ -10,13 +10,17 @@ public class PlanetDesert1 : MonoBehaviour, IPlanet, IHp
     [SerializeField] private float firingRate = 0.0f;
     [SerializeField] private GameObject standardProjectile;
     [SerializeField] private GameObject empProjectile;
+    [SerializeField] private GameObject vulnerabilityPrefab;
+    [SerializeField] private Transform distanceKeeperTransform;
 
     public Slider slider;
     private float initialScale;
     private float initialHp;
     private int phase = 0;
     public Transform playerTransform;
-    
+    private GameObject vulnerability;
+
+    private Coroutine vulnerabilityRoutine;
     private Coroutine shootingRoutine;
     private InLevelControl controller;
     private PlanetOverlaps planetOverlaps;
@@ -33,6 +37,7 @@ public class PlanetDesert1 : MonoBehaviour, IPlanet, IHp
         if (playerTransform != null)
         {
             shootingRoutine = StartCoroutine(FireContinuously());
+            vulnerabilityRoutine = StartCoroutine(InstantiateVulnerability());
         }
     }
     
@@ -87,6 +92,26 @@ public class PlanetDesert1 : MonoBehaviour, IPlanet, IHp
         Stun();
         firingRate -= 0.05f;
         Debug.Log("TwoThirds called");
+    }
+    
+    public IEnumerator InstantiateVulnerability()
+    {
+        while (!controller.died)
+        {
+            yield return new WaitForSeconds(Random.Range(3, 6));
+            if (vulnerability == null)
+            {
+                vulnerability = Instantiate(vulnerabilityPrefab);
+                var vScript = vulnerability.GetComponent<Vulnerability>();
+                vScript.planet = this;
+                vulnerability.transform.parent = gameObject.transform;
+                vulnerability.transform.position = transform.position;
+                float distance = Vector3.Distance(vulnerability.transform.position, distanceKeeperTransform.position);
+                vulnerability.transform.LookAt(playerTransform);
+                vulnerability.transform.Rotate(Random.Range(-35f, 5f), 0f, 0f);
+                vulnerability.transform.position = transform.position + vulnerability.transform.forward * distance;
+            }
+        }
     }
     
     public IEnumerator FireContinuously()

@@ -59,7 +59,7 @@ public class EMPProjectile : MonoBehaviour, IHp
     {
         if(col.TryGetComponent(out IShip player))
         {
-            player.Stun(1.0f);
+            StartCoroutine(player.Stun(1.0f));
             stunAudio.Play();
         }
         if(col.TryGetComponent(out ShakeObject playerShaker))

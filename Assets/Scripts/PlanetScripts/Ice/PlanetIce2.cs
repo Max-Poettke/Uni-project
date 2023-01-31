@@ -105,7 +105,7 @@ public class PlanetIce2 : MonoBehaviour, IPlanet
     public void TwoThirds()
     {
         armor += 2;
-        firingRate -= 0.06f;
+        firingRate -= 0.04f;
         chanceToSpawnBoulder = 2f / 6f;
         Destroy(vulnerability);
         Debug.Log("TwoThirds called");

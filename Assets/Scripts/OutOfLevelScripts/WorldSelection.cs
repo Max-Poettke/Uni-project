@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class WorldSelection : MonoBehaviour
 {
     public int worldIndex = 0;
+    public float targetRotationY = 0;
     //info that needs to be gotten if worldselection is started again
     [SerializeField] public Transform[] planetTransforms = new Transform[4];
     [SerializeField] public GameObject planetCenter;
@@ -18,12 +19,15 @@ public class WorldSelection : MonoBehaviour
     [SerializeField] private GameObject[] planets_Earth = new GameObject[3];
     [SerializeField] private GameObject[] planets_Desert = new GameObject[3];
     [SerializeField] private GameObject[] planets_Alien = new GameObject[3];
+    
+    //Shopstuff
+    [SerializeField] public GameObject shopUI;
+    //private variables
     private GameObject[][] planetsWhole = new GameObject[4][];
     private Coroutine selectionCoroutine;
     private Coroutine leaveRoutine;
     private SceneManagement sceneManagementScript;
     private LevelSelection levelSelectionScript;
-    float targetRotationY = 0;
     void Start()
     {
         GetInfo();
@@ -34,11 +38,17 @@ public class WorldSelection : MonoBehaviour
         planetsWhole[3] = planets_Alien;
     }
 
+    void OnEnable()
+    {
+        worldIndex = 0;
+    }
+
     public void GetInfo()
     {
         sceneManagementScript = GameObject.FindGameObjectWithTag("SceneManager").GetComponent<SceneManagement>();
         levelSelectionScript = GetComponent<LevelSelection>();
         worldIndex = 0;
+        targetRotationY = 0;
     }
 
     // Update is called once per frame
@@ -66,7 +76,7 @@ public class WorldSelection : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            
+            shopUI.SetActive(!shopUI.activeSelf);
         }
         
         if (Input.GetKeyDown(KeyCode.A))
@@ -98,9 +108,9 @@ public class WorldSelection : MonoBehaviour
             if (selectionCoroutine != null)
             {
                 StopCoroutine(selectionCoroutine);
-                StartCoroutine(selectWorld());
+                StartCoroutine(SelectWorld());
             }
-            StartCoroutine(selectWorld());
+            StartCoroutine(SelectWorld());
         }
     }
 
@@ -117,7 +127,7 @@ public class WorldSelection : MonoBehaviour
         }
     }
 
-    private IEnumerator selectWorld()
+    private IEnumerator SelectWorld()
     {
         foreach (var t in text)
         {

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public interface IUnlockeable
 {
+    float GetPrice();
     void SetUnlocked();
     bool GetUnlocked();
 }

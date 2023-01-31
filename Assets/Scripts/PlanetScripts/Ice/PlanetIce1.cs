@@ -43,9 +43,10 @@ public class PlanetIce1 : MonoBehaviour, IPlanet, IHp
 
     public void TakeDamage(float damage, float armorPenetrationFactor)
     {
+        var newArmor = (armor / armorPenetrationFactor < 1) ? 1 : armor / armorPenetrationFactor;
         if (armor != 0)
         {
-            damage *= armorPenetrationFactor / armor;
+            damage *= damage / newArmor;
         }
         hp -= damage;
         slider.value = hp;

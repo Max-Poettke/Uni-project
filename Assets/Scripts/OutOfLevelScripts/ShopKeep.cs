@@ -1,21 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class ShopKeep : MonoBehaviour
 {
-    public float points = 0;
-    [SerializeField] public GameObject[] guns;
-    private int currentGunIndex = 0;
-    [SerializeField] public GameObject[] ships;
-    private int currentShipIndex = 0;
-    [SerializeField] public GameObject[] trinkets;
-    private int currentTrinketIndex = 0;
-
-    private InLevelControl controller;
-
-    void Start()
-    {
-        controller = GetComponent<InLevelControl>();
-    }
+    public float points = 0; 
+    //2 dimensional Array -> 3 types ship, gun and trinket with respective isPurchased values
+    public bool[][] purchasedItems = new bool[3][];
+    public bool initialized = false;
 }
