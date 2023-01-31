@@ -105,11 +105,6 @@ public class StandardShip : MonoBehaviour, IShip
         return result;
     }
 
-    public float GetPrice()
-    {
-        throw new System.NotImplementedException();
-    }
-
     public void SetUnlocked()
     {
         return;
