@@ -13,6 +13,8 @@ public class PlanetIce3 : MonoBehaviour, IPlanet
     [SerializeField] private GameObject vulnerabilityPrefab;
     [SerializeField] private Transform distanceKeeperTransform;
     [SerializeField] private float defaultProjectileSpeed;
+    [SerializeField] private AudioSource deathSound;
+    [SerializeField] private ParticleSystem deathAnimation;
 
     private Slider slider;
     private bool isWave = false;
@@ -62,7 +64,10 @@ public class PlanetIce3 : MonoBehaviour, IPlanet
         {
             Destroy(vulnerability);
         }
-        Destroy(gameObject);
+        deathAnimation.Play();
+        deathSound.Play();
+        this.enabled = false;
+        gameObject.GetComponent<MeshRenderer>().enabled = false;
     }
 
     public void TakeDamage(float damage, float armorPenetrationFactor)
@@ -114,7 +119,7 @@ public class PlanetIce3 : MonoBehaviour, IPlanet
         firingRate -= 0.07f;
         Destroy(vulnerability);
         chanceToSpawnBoulder = 1f / 6f;
-        StartCoroutine(DeactivateMobility(1f));
+        //StartCoroutine(DeactivateMobility(1f));
         Debug.Log("OneThird called");
     }
 

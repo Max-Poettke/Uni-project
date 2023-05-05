@@ -144,6 +144,7 @@ GameObject:
   - component: {fileID: 7711122223862225194}
   - component: {fileID: 2562477474808723793}
   - component: {fileID: 1884432054735934889}
+  - component: {fileID: 6059310696818209996}
   m_Layer: 0
   m_Name: Ice-3
   m_TagString: Untagged
@@ -164,6 +165,7 @@ Transform:
   m_Children:
   - {fileID: 287547647590628071}
   - {fileID: 7957035780284829551}
+  - {fileID: 2901452846521300936}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -261,7 +263,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02bcc880fcb108745b5ca4e3b68ea117, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 600
+  hp: 500
   armor: 0
   firingRate: 0.3
   standardProjectile: {fileID: 7833996121841672716, guid: e90f52aa72403474d9e4d26c8445c7a3, type: 3}
@@ -269,6 +271,8 @@ MonoBehaviour:
   vulnerabilityPrefab: {fileID: 7870427874595755426, guid: 275653c51d5967b4a9ddf0f180648b42, type: 3}
   distanceKeeperTransform: {fileID: 7957035780284829551}
   defaultProjectileSpeed: 2.5
+  deathSound: {fileID: 6059310696818209996}
+  deathAnimation: {fileID: 7494658937494742947}
   playerTransform: {fileID: 0}
 --- !u!114 &1884432054735934889
 MonoBehaviour:
@@ -282,3 +286,166 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dae8745b8bc82047be0595f6d8fb750, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!82 &6059310696818209996
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6925774051847845965}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 057c9718097f70547a85787194024228, type: 2}
+  m_audioClip: {fileID: 8300000, guid: 41940a763108c9d44968a1afc44cab1b, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!1001 &6379810579798276213
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 6216677323602971230}
+    m_Modifications:
+    - target: {fileID: 561305410904835883, guid: f1f148433bf1ccc438fc1c8fc438215e, type: 3}
+      propertyPath: m_Name
+      value: Particle System
+      objectReference: {fileID: 0}
+    - target: {fileID: 8128333318586699709, guid: f1f148433bf1ccc438fc1c8fc438215e, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8128333318586699709, guid: f1f148433bf1ccc438fc1c8fc438215e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 336.84198
+      objectReference: {fileID: 0}
+    - target: {fileID: 8128333318586699709, guid: f1f148433bf1ccc438fc1c8fc438215e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 61.137688
+      objectReference: {fileID: 0}
+    - target: {fileID: 8128333318586699709, guid: f1f148433bf1ccc438fc1c8fc438215e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8128333318586699709, guid: f1f148433bf1ccc438fc1c8fc438215e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 8128333318586699709, guid: f1f148433bf1ccc438fc1c8fc438215e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 8128333318586699709, guid: f1f148433bf1ccc438fc1c8fc438215e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8128333318586699709, guid: f1f148433bf1ccc438fc1c8fc438215e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8128333318586699709, guid: f1f148433bf1ccc438fc1c8fc438215e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 8128333318586699709, guid: f1f148433bf1ccc438fc1c8fc438215e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8128333318586699709, guid: f1f148433bf1ccc438fc1c8fc438215e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f1f148433bf1ccc438fc1c8fc438215e, type: 3}
+--- !u!4 &2901452846521300936 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8128333318586699709, guid: f1f148433bf1ccc438fc1c8fc438215e, type: 3}
+  m_PrefabInstance: {fileID: 6379810579798276213}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &7494658937494742947 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 3498104437714657238, guid: f1f148433bf1ccc438fc1c8fc438215e, type: 3}
+  m_PrefabInstance: {fileID: 6379810579798276213}
+  m_PrefabAsset: {fileID: 0}

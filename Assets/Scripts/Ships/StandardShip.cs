@@ -7,6 +7,8 @@ public class StandardShip : MonoBehaviour, IShip
     private Camera _camera;
     public Transform planet;
     public InLevelControl inLevelControlScript;
+    public AudioSource deathSound;
+    public ParticleSystem particleSystem;
 
     private bool foundTargetPlanet = false;
 
@@ -67,16 +69,11 @@ public class StandardShip : MonoBehaviour, IShip
     public void Die()
     {
         inLevelControlScript.died = true;
-        Destroy(gameObject);
-    }
-
-
-    public IEnumerator Stun(float duration)
-    {
-        yield return new WaitForSeconds(1f);
-        inLevelControlScript.isInhibited = true;
-        yield return new WaitForSeconds(duration);
-        inLevelControlScript.isInhibited = false;
+        particleSystem.Play();
+        deathSound.Play();
+        //Destroy(gameObject);
+        this.enabled = false;
+        gameObject.GetComponent<MeshRenderer>().enabled = false;
     }
 
     public void tryGetInfo()

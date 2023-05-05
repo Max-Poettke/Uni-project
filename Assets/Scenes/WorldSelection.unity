@@ -1681,7 +1681,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.25943398, g: 1, b: 0.30590087, a: 0.5019608}
+  m_Color: {r: 0.2588235, g: 0.33887768, b: 1, a: 0.5019608}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2164,7 +2164,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Pruchase
+  m_text: 'Purchase
 
 '
   m_isRightToLeft: 0
@@ -4028,6 +4028,7 @@ MonoBehaviour:
   - {fileID: 1269519449}
   - {fileID: 401524073}
   - {fileID: 479548380}
+  currentTrinketIndex: 0
 --- !u!4 &1679685267
 Transform:
   m_ObjectHideFlags: 0
@@ -4830,6 +4831,7 @@ MonoBehaviour:
   isInhibited: 0
   isPaused: 0
   rotationSpeed: 5
+  timer: 0
   points: 0
   destroyedProjectiles: 0
   hitVulnerabilities: 0
@@ -5757,6 +5759,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   planet: {fileID: 0}
   inLevelControlScript: {fileID: 0}
+  deathSound: {fileID: 0}
+  particleSystem: {fileID: 0}
   speed: 5
   rotationSpeed: 30
   isMoving: 0

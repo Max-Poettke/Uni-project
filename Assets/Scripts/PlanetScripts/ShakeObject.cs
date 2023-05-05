@@ -19,7 +19,6 @@ public class ShakeObject : MonoBehaviour
     }
     private IEnumerator Shake(float duration, float magnitude)
     {
-        
         float timer = 0;
         while (timer < duration)
         {
@@ -32,6 +31,5 @@ public class ShakeObject : MonoBehaviour
         }
         transform.localPosition = pos;
         StopCoroutine(shakeRoutine);
-        Debug.Log("Stopped");
     }
 }

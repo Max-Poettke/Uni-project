@@ -18,6 +18,7 @@ public class EMPProjectile : MonoBehaviour, IHp
     {
         if (controller.isPaused) return;
         if (controller.died) return;
+        if (controller.levelCompleted) return;
         Move();
         Expire();
     }
@@ -57,9 +58,9 @@ public class EMPProjectile : MonoBehaviour, IHp
     
     void OnTriggerEnter(Collider col)
     {
-        if(col.TryGetComponent(out IShip player))
+        if (col.CompareTag("Player"))
         {
-            StartCoroutine(player.Stun(1.0f));
+            controller.stunCoroutine = StartCoroutine(controller.Stun(1.0f));
             stunAudio.Play();
         }
         if(col.TryGetComponent(out ShakeObject playerShaker))

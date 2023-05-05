@@ -9,6 +9,7 @@ public class ButtonFunctions : MonoBehaviour
 {
     [SerializeField] private GameObject controlsUI;
     [SerializeField] private GameObject optionsUI;
+    [SerializeField] private GameObject creditsUI;
     [SerializeField] private AudioMixer musicMixer;
     [SerializeField] private AudioMixer sfxMixer;
     [SerializeField] private AudioSource sfxTest;
@@ -18,6 +19,7 @@ public class ButtonFunctions : MonoBehaviour
         {
             controlsUI.SetActive(false);
             optionsUI.SetActive(false);
+            creditsUI.SetActive(false);
         }
     }
     public void StartGame()
@@ -38,6 +40,7 @@ public class ButtonFunctions : MonoBehaviour
 
     public void Credits()
     {
+        creditsUI.SetActive(true);
     }
 
     public void LeaveGame()

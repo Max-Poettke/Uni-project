@@ -9,6 +9,7 @@ public class PlanetSpawner : MonoBehaviour
     private LevelSelection lSel;
     [SerializeField] private GameObject cameraObject;
     [SerializeField] private RawImage blackScreen;
+    [SerializeField] private GameObject cantSelectUI;
 
     void Awake()
     {
@@ -21,6 +22,7 @@ public class PlanetSpawner : MonoBehaviour
         lSel = GameObject.FindGameObjectWithTag("GameMaster").GetComponent<LevelSelection>();
         lSel.cameraObject = cameraObject;
         lSel.blackScreen = blackScreen;
+        lSel.cantSelectUI = cantSelectUI;
         SpawnPlanets();
     }
 

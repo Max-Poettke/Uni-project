@@ -35,18 +35,20 @@ public class InLevelControl : MonoBehaviour
     public bool died = false;
     public bool autoRestart = false;
     private bool started = false;
+    private bool ended = false;
     public bool waited = false;
     private bool firing = false;
     public bool isInhibited = false;
     public bool isPaused = false;
     //                                      misc
     [SerializeField] private float rotationSpeed;
-    private float timer = 0.0f;
+    public float timer = 0.0f;
     public float points = 0.0f;
     public float destroyedProjectiles = 0.0f;
     public float hitVulnerabilities = 0.0f;
     private Vector3 rotationDirection;
     private Coroutine waitRoutine = null;
+    public Coroutine stunCoroutine = null;
     //                                      references
     public SceneManagement.GameStates gameState;
     public SceneManagement sceneManagementScript;
@@ -63,7 +65,7 @@ public class InLevelControl : MonoBehaviour
         {
             Destroy(gameObject);
         }
-            
+        
     }
 
     public void StartLevel()
@@ -72,6 +74,11 @@ public class InLevelControl : MonoBehaviour
         sceneManagementScript = GameObject.FindGameObjectWithTag("SceneManager").GetComponent<SceneManagement>();
         shopKeepScript = GetComponent<ShopKeep>();
         rotationDirection = transform.forward;
+        points = 0;
+        timer = 0;
+        destroyedProjectiles = 0;
+        hitVulnerabilities = 0;
+        ended = false;
 
         //instantiate the planet
         instantiatedPlanet = Instantiate(planet);
@@ -126,13 +133,10 @@ public class InLevelControl : MonoBehaviour
         {
             //load level information UI
             levelCompletedUI.SetActive(true);
-            if (waitRoutine == null)
+            if (ended == false)
             {
                 waitRoutine = StartCoroutine(waitABit());
-                text[0].text += Mathf.Round(timer) + "s";
-                text[1].text += " " + destroyedProjectiles;
-                text[2].text += " " + hitVulnerabilities;
-                text[3].text += "\n" + points;
+                ended = true;
             }
             if (!waited) return true;
             if (Input.anyKeyDown)
@@ -175,6 +179,10 @@ public class InLevelControl : MonoBehaviour
         var ws = gameObject.GetComponent<WorldSelection>();
         ws.enabled = true;
         ws.worldIndex = 0;
+        ws.targetRotationY = 0;
+        youDiedUI.SetActive(false);
+        pauseUI.SetActive(false);
+        levelCompletedUI.SetActive(false);
         sceneManagementScript.LoadScene("WorldSelection");
         
     }
@@ -185,7 +193,6 @@ public class InLevelControl : MonoBehaviour
         died = false;
         firing = false;
         points = 0;
-        youDiedUI.SetActive(false);
         sceneManagementScript.LoadScene("LevelScene");
     }
 
@@ -234,7 +241,18 @@ public class InLevelControl : MonoBehaviour
 
     IEnumerator waitABit()
     {
+        text[0].text += Mathf.Round(timer) + "s";
+        text[1].text += " " + destroyedProjectiles;
+        text[2].text += " " + hitVulnerabilities;
+        text[3].text += "\n" + points;
         yield return new WaitForSeconds(2);
         waited = true;
+    }
+    
+    public IEnumerator Stun(float duration)
+    {
+        isInhibited = true;
+        yield return new WaitForSeconds(duration);
+        isInhibited = false;
     }
 }

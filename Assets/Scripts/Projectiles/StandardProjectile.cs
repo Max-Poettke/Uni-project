@@ -62,6 +62,12 @@ public class StandardProjectile : MonoBehaviour , IMoveable, IKillable
     
     void OnTriggerEnter(Collider other)
     {
+        other.gameObject.TryGetComponent(out ShakeObject shakeScript);
+        if (shakeScript != null && !other.CompareTag("Player"))
+        {
+            shakeScript.ShakeNow(0.3f,0.05f);
+        }
+        
         if (other.CompareTag("Vulnerability"))
         {
             //collision detection for vulnerabilities
@@ -89,12 +95,6 @@ public class StandardProjectile : MonoBehaviour , IMoveable, IKillable
         if(other.TryGetComponent(out IHp killableObject))
         {
             //Collision detection for planets
-            GameObject planet = other.gameObject;
-            planet.TryGetComponent(out ShakeObject shakeScript);
-            if (shakeScript != null)
-            {
-                shakeScript.ShakeNow(0.3f,0.05f);
-            }
             Instantiate(explosionPrefab, transform.position, transform.rotation);
             killableObject.TakeDamage(damage, armorPenetrationFactor);
             Die();

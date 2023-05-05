@@ -34,6 +34,9 @@ public class InformationProvider : MonoBehaviour
             _levelControl = GameObject.FindGameObjectWithTag("GameMaster").GetComponent<InLevelControl>();
             yield return new WaitForFixedUpdate();
         }
+
+        _levelControl.timer = 0;
+        _levelControl.points = 0;
         _levelControl.levelCompletedUI = levelCompletedUI;
         _levelControl.youDiedUI = youDiedUI;
         _levelControl.pauseUI = pauseUI;

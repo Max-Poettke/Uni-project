@@ -31,6 +31,7 @@ public class StandardEnergyProjectile : MonoBehaviour, IHp
     {
         if (controller.isPaused) return;
         if (controller.died) return;
+        if (controller.levelCompleted) return;
         Move();
         Expire();
     }

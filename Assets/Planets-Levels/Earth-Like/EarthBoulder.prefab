@@ -126,8 +126,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   releasedProjectiles: 5
-  speedMin: 0.5
-  speedMax: 1.5
-  speed: 1.3
   lifeTime: 10
   standardProjectile: {fileID: 3456107387243647280, guid: 1b2be778d90aedd4486ff9c86b64b720, type: 3}

@@ -12,7 +12,10 @@ public class PlanetDesert1 : MonoBehaviour, IPlanet, IHp
     [SerializeField] private GameObject empProjectile;
     [SerializeField] private GameObject vulnerabilityPrefab;
     [SerializeField] private Transform distanceKeeperTransform;
+    [SerializeField] private AudioSource deathSound;
+    [SerializeField] private ParticleSystem deathAnimation;
 
+    private bool enraged = false;
     public Slider slider;
     private float initialScale;
     private float initialHp;
@@ -44,7 +47,10 @@ public class PlanetDesert1 : MonoBehaviour, IPlanet, IHp
     public void Die()
     {
         controller.levelCompleted = true;
-        Destroy(gameObject);
+        deathSound.Play();
+        deathAnimation.Play();
+        this.enabled = false;
+        gameObject.GetComponent<MeshRenderer>().enabled = false;
     }
 
     public void TakeDamage(float damage, float armorPenetrationFactor)
@@ -83,6 +89,7 @@ public class PlanetDesert1 : MonoBehaviour, IPlanet, IHp
     public void OneThird()
     {
         Stun();
+        armor++;
         firingRate -= 0.05f;
         Debug.Log("OneThird called");
     }
@@ -90,7 +97,10 @@ public class PlanetDesert1 : MonoBehaviour, IPlanet, IHp
     public void TwoThirds()
     {
         Stun();
+        armor++;
+        enraged = true;
         firingRate -= 0.05f;
+        StartCoroutine(StunContinuously());
         Debug.Log("TwoThirds called");
     }
     
@@ -120,6 +130,18 @@ public class PlanetDesert1 : MonoBehaviour, IPlanet, IHp
         {
             yield return new WaitForSeconds(firingRate);
             FireProjectile();
+        }
+    }
+    
+    public IEnumerator StunContinuously()
+    {
+        while (!controller.died)
+        {
+            yield return new WaitForSeconds(7);
+            if (enraged)
+            {
+                Stun();    
+            }
         }
     }
 

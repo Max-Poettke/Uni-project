@@ -15,6 +15,8 @@ public class ButtonsLevel : MonoBehaviour
         controller.enabled = false;
         controller.points = 0;
         controller.levelCompleted = false;
+        controller.died = false;
+        controller.points = 0;
         for (var i = 0; i < uIs.Length; i++)
         {
             uIs[i].SetActive(false);

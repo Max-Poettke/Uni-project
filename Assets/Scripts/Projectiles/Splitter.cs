@@ -27,6 +27,7 @@ public class Splitter : MonoBehaviour, IHp, ISplitter, ISpeedChangeable
     {
         if (controller.isPaused) return;
         if (controller.died) return;
+        if (controller.levelCompleted) return;
         Move();
         Expire();
     }

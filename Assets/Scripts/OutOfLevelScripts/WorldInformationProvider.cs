@@ -28,7 +28,7 @@ public class WorldInformationProvider : MonoBehaviour
     private float currentPrice;
     private int currentShipIndex = 0;
     private int currentGunIndex = 0;
-    private int currentTrinketIndex = 0;
+    [SerializeField] public int currentTrinketIndex = 0;
     private InLevelControl controller;
     private ShopKeep shopKeep;
     void Awake()
@@ -44,13 +44,13 @@ public class WorldInformationProvider : MonoBehaviour
             shopKeep.purchasedItems[2] = new bool[trinkets.Length];
             shopKeep.purchasedItems[0][0] = true;
             shopKeep.purchasedItems[1][0] = true;
-            prices = new float [Mathf.Max(Mathf.Max(guns.Length, ships.Length), trinkets.Length)];
-            for (int i = 0; i < prices.Length; i++)
-            {
-                prices[i] = 700 + 700 * i;
-            }
+            shopKeep.initialized = true;
         }
-        
+        prices = new float [Mathf.Max(Mathf.Max(guns.Length, ships.Length), trinkets.Length)];
+        for (int i = 0; i < prices.Length; i++)
+        {
+            prices[i] = 700 + 700 * i;
+        }
         startingCoroutine = StartCoroutine(TryUpdateGameMaster());
         SetText(textObjects[0].GetComponent<TMP_Text>(), ships[currentShipIndex].name, true);
         SetText(textObjects[1].GetComponent<TMP_Text>(), guns[currentGunIndex].name, true);

@@ -7,5 +7,4 @@ public interface IShip
     void Move();
     void tryGetInfo();
     void Die();
-    IEnumerator Stun(float duration);
 }

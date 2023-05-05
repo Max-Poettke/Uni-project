@@ -11,6 +11,7 @@ public class LevelSelection : MonoBehaviour
     public GameObject [] planets;
     public GameObject[] indicators;
     public GameObject cameraObject;
+    public GameObject cantSelectUI;
     private Coroutine selectionCoroutine;
     private InLevelControl controlScript;
 
@@ -66,6 +67,12 @@ public class LevelSelection : MonoBehaviour
     
     private IEnumerator selectLevel()
     {
+        if (!planets[selected].TryGetComponent(out IPlanet planetScript))
+        {
+            cantSelectUI.SetActive(true);
+            StartCoroutine(DeactivateUI());
+            yield break;
+        }
         //text.SetActive(false);
         float alpha = 0f;
         float timer = 0f;
@@ -84,6 +91,12 @@ public class LevelSelection : MonoBehaviour
         controlScript.planet = planets[selected];
         GetComponent<InLevelControl>().enabled = true;
         sceneManagementScript.LoadScene("LevelScene");
+    }
+
+    private IEnumerator DeactivateUI()
+    {
+        yield return new WaitForSeconds(1);
+        cantSelectUI.SetActive(false);
     }
 
 }

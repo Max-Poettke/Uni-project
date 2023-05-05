@@ -13,6 +13,8 @@ public class PlanetEarth1 : MonoBehaviour, IPlanet
     [SerializeField] private GameObject vulnerabilityPrefab;
     [SerializeField] private Transform distanceKeeperTransform;
     [SerializeField] private float defaultProjectileSpeed;
+    [SerializeField] private AudioSource deathSound;
+    [SerializeField] private ParticleSystem deathAnimation;
 
     private Slider slider;
     private float chanceToSpawnBoulder = 0;
@@ -52,7 +54,12 @@ public class PlanetEarth1 : MonoBehaviour, IPlanet
         {
             Destroy(vulnerability);
         }
-        Destroy(gameObject);
+        
+        deathSound.Play();
+        deathAnimation.Play();
+        this.enabled = false;
+        gameObject.GetComponent<MeshRenderer>().enabled = false;
+        //Destroy(gameObject);
     }
 
     public void TakeDamage(float damage, float armorPenetrationFactor)

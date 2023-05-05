@@ -9,6 +9,8 @@ public class PlanetIce1 : MonoBehaviour, IPlanet, IHp
     [SerializeField] private float armor;
     [SerializeField] private float firingRate = 0.0f;
     [SerializeField] private GameObject standardProjectile;
+    [SerializeField] private AudioSource deathSound;
+    [SerializeField] private ParticleSystem deathAnimation;
 
     public Slider slider;
     private float initialScale;
@@ -38,7 +40,10 @@ public class PlanetIce1 : MonoBehaviour, IPlanet, IHp
     public void Die()
     {
         controller.levelCompleted = true;
-        Destroy(gameObject);
+        deathSound.Play();
+        deathAnimation.Play();
+        this.enabled = false;
+        gameObject.GetComponent<MeshRenderer>().enabled = false;
     }
 
     public void TakeDamage(float damage, float armorPenetrationFactor)
