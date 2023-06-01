@@ -28,6 +28,7 @@ public class WorldSelection : MonoBehaviour
     private Coroutine leaveRoutine;
     private SceneManagement sceneManagementScript;
     private LevelSelection levelSelectionScript;
+    public bool talking;
     void Start()
     {
         GetInfo();
@@ -59,6 +60,8 @@ public class WorldSelection : MonoBehaviour
 
     void CheckForInputs()
     {
+        if (talking) return;
+        
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Debug.Log("manager: " + sceneManagementScript);
