@@ -6,7 +6,9 @@ using UnityEngine;
 public class StandardGun : MonoBehaviour, IGun
 {
     [SerializeField] private GameObject projectile;
-    [SerializeField] private float firingCooldown = 0.3f;
+    public float firingCooldown = 0.3f;
+    public float damage;
+    public int penetrationFactor;
     private float timer = 0;
     private bool cantFire = false;
 
@@ -14,7 +16,7 @@ public class StandardGun : MonoBehaviour, IGun
     {
         if (cantFire)
         {
-            timer += Time.deltaTime; 
+            timer += Time.deltaTime;
         }
         
         if (timer >= firingCooldown)
@@ -29,5 +31,10 @@ public class StandardGun : MonoBehaviour, IGun
         if (cantFire) return;
         Instantiate(projectile, transform.position, transform.rotation);
         cantFire = true;
+    }
+
+    private void instantiateProjectile(GameObject projectile)
+    {
+        
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,4 +11,11 @@ public class ShopKeep : MonoBehaviour
     //2 dimensional Array -> 3 types ship, gun and trinket with respective isPurchased values
     public bool[][] purchasedItems = new bool[3][];
     public bool initialized = false;
+    
+    
+    
+    private void Awake()
+    {
+        
+    }
 }
