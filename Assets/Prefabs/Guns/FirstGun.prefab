@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectile: {fileID: 969198404510156953, guid: f453cd35b54dcbd4dbf3c5013b6f9f93, type: 3}
-  firingCooldown: 0.24179393
+  firingCooldown: 0.038533818
   dmgIncrement: 2
   penetrationIncrement: 1
   firingIncrement: 1.3

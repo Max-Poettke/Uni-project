@@ -93,7 +93,7 @@ public class StandardShip : MonoBehaviour, IShip
         bool result = true;
         Vector3 posInViewSpace = _camera.WorldToViewportPoint(transform.position + transform.up * xMove);
         if (posInViewSpace.x < 0.0f
-            ||posInViewSpace.x > 0.65f
+            ||posInViewSpace.x > 0.85f
             ||posInViewSpace.y < 0.0f
             ||posInViewSpace.y > 1.0f)
         {
