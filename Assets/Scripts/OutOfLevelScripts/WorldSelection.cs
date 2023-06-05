@@ -28,6 +28,7 @@ public class WorldSelection : MonoBehaviour
     private Coroutine leaveRoutine;
     private SceneManagement sceneManagementScript;
     private LevelSelection levelSelectionScript;
+    private WorldInformationProvider worldInformationProvider;
     public bool talking;
     void Start()
     {
@@ -46,7 +47,10 @@ public class WorldSelection : MonoBehaviour
 
     public void GetInfo()
     {
-        sceneManagementScript = GameObject.FindGameObjectWithTag("SceneManager").GetComponent<SceneManagement>();
+        sceneManagementScript = GameObject.FindGameObjectWithTag("SceneManager")
+            .GetComponent<SceneManagement>();
+        worldInformationProvider = GameObject.FindGameObjectWithTag("WorldInformationProvider")
+            .GetComponent<WorldInformationProvider>();
         levelSelectionScript = GetComponent<LevelSelection>();
         worldIndex = 0;
         targetRotationY = 0;
@@ -80,6 +84,16 @@ public class WorldSelection : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             shopUI.SetActive(!shopUI.activeSelf);
+            //reset the want of the upgrade indeces
+            worldInformationProvider.dmgUpgrade =
+                worldInformationProvider.guns[worldInformationProvider.currentGunIndex].GetComponent<IGun>().dmgUpgrade;
+            worldInformationProvider.firingUpgrade =
+                worldInformationProvider.guns[worldInformationProvider.currentGunIndex].GetComponent<IGun>().firingUpgrade;
+            worldInformationProvider.penetrationUpgrade = 
+                worldInformationProvider.guns[worldInformationProvider.currentGunIndex].GetComponent<IGun>().firingUpgrade;
+            
+            worldInformationProvider.UpdateText();
+            worldInformationProvider.upgradePrice = 0;
         }
         
         if (Input.GetKeyDown(KeyCode.A))

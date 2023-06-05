@@ -1,16 +1,22 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 public class StandardGun : MonoBehaviour, IGun
 {
     [SerializeField] private GameObject projectile;
     public float firingCooldown = 0.3f;
-    public float damage;
-    public int penetrationFactor;
     private float timer = 0;
     private bool cantFire = false;
+    
+    public float dmgIncrement = 5f;
+    public float penetrationIncrement = 1f;
+    public float firingIncrement = 1.3f; 
+    public int dmgUpgrade { get; set; }
+    public int firingUpgrade {get; set; }
+    public int penetrationUpgrade {get; set; }
 
     private void Update()
     {
@@ -33,8 +39,11 @@ public class StandardGun : MonoBehaviour, IGun
         cantFire = true;
     }
 
-    private void instantiateProjectile(GameObject projectile)
+    public void Upgrade()
     {
-        
+        var projScript = projectile.GetComponent<StandardProjectile>();
+        projScript.damage += dmgIncrement;
+        projScript.hp += (int) penetrationIncrement;
+        firingCooldown /= firingIncrement;
     }
 }

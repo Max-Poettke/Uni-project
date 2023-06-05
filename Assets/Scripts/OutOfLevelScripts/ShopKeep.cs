@@ -13,9 +13,4 @@ public class ShopKeep : MonoBehaviour
     public bool initialized = false;
     
     
-    
-    private void Awake()
-    {
-        
-    }
 }
