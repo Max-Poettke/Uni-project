@@ -113,12 +113,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1fc7d36a056ddf47828606ea235d4bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 3
+  hp: 4
   explosionPrefab: {fileID: 2046547038296772661, guid: 7607552e68f36a44d9d306c949601d3c, type: 3}
   targetTransform: {fileID: 0}
   speed: 15
   armorPenetrationFactor: 1
-  damage: 3
+  damage: 5
   lifeTime: 15
 --- !u!54 &2320865869950058977
 Rigidbody:

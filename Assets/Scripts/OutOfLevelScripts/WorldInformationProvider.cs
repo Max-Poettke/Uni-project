@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using TMPro;
 public class WorldInformationProvider : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class WorldInformationProvider : MonoBehaviour
     [SerializeField] public GameObject[] guns;
     [SerializeField] public GameObject[] trinkets;
     [SerializeField] private float [] prices;
+    private bool firstEver = true;
     public GameObject[] textObjects;
     private float currentPrice;
     public int currentShipIndex = 0;
@@ -60,11 +62,35 @@ public class WorldInformationProvider : MonoBehaviour
         {
             prices[i] = 700 + 700 * i;
         }
+    
+        
+        
+        if (firstEver)
+        {
+            foreach (var gun in guns)
+            {
+                gunScript = gun.GetComponent<IGun>();
+                dmgUpgrade = 0;
+                firingUpgrade = 0;
+                penetrationUpgrade = 0;
+                gunScript.Upgrade(dmgUpgrade - gunScript.dmgUpgrade, penetrationUpgrade - gunScript.penetrationUpgrade, firingUpgrade - gunScript.firingUpgrade);
+                gunScript.dmgUpgrade = 0;
+                gunScript.firingUpgrade = 0;
+                gunScript.penetrationUpgrade = 0;
+            }
+        }
+
+        gunScript = guns[currentGunIndex].GetComponent<IGun>();
         startingCoroutine = StartCoroutine(TryUpdateGameMaster());
         SetText(textObjects[0].GetComponent<TMP_Text>(), ships[currentShipIndex].name, true);
         SetText(textObjects[1].GetComponent<TMP_Text>(), guns[currentGunIndex].name, true);
         SetText(textObjects[2].GetComponent<TMP_Text>(), trinkets[currentTrinketIndex].name, shopKeep.purchasedItems[2][0]);
+        
+        UpdateText();
+    }
 
+    public void UpdateText()
+    {
         gunScript = guns[currentGunIndex].GetComponent<IGun>();
         dmgUpgrade = gunScript.dmgUpgrade;
         penetrationUpgrade = gunScript.penetrationUpgrade;
@@ -73,11 +99,7 @@ public class WorldInformationProvider : MonoBehaviour
         upgradeText[0].text = dmgUpgrade.ToString();
         upgradeText[1].text = penetrationUpgrade.ToString();
         upgradeText[2].text = firingUpgrade.ToString();
-        UpdateText();
-    }
-
-    public void UpdateText()
-    {
+        
         SetText(upgradeText[0], dmgUpgrade.ToString(), true);
         SetText(upgradeText[1], penetrationUpgrade.ToString(), true);
         SetText(upgradeText[2], firingUpgrade.ToString(), true);
@@ -85,7 +107,15 @@ public class WorldInformationProvider : MonoBehaviour
 
     public void Update()
     {
+        if (gunScript.dmgUpgrade == dmgUpgrade
+            && gunScript.penetrationUpgrade == penetrationUpgrade
+            && gunScript.firingUpgrade == firingUpgrade)
+        {
+            upgradePrice = 0;
+        }
+     
         currentPrice = upgradePrice;
+        
         if (shopKeep.purchasedItems[0][currentShipIndex] == false)
         {
             currentPrice += prices[currentShipIndex];
@@ -158,6 +188,7 @@ public class WorldInformationProvider : MonoBehaviour
     {
         currentGunIndex = (currentGunIndex + guns.Length - 1) % guns.Length;
         SetText(textObjects[1].GetComponent<TMP_Text>(), guns[currentGunIndex].name, shopKeep.purchasedItems[1][currentGunIndex]);
+        UpdateText();
         if (shopKeep.purchasedItems[1][currentGunIndex] == false)
         {
             return;
@@ -169,6 +200,7 @@ public class WorldInformationProvider : MonoBehaviour
     {
         currentGunIndex = (currentGunIndex + 1) % guns.Length;
         SetText(textObjects[1].GetComponent<TMP_Text>(), guns[currentGunIndex].name, shopKeep.purchasedItems[1][currentGunIndex]);
+        UpdateText();
         if (shopKeep.purchasedItems[1][currentGunIndex] == false)
         {
             return;
@@ -198,25 +230,33 @@ public class WorldInformationProvider : MonoBehaviour
         controller.trinket = trinkets[currentTrinketIndex];
     }
 
-    public void wantUpgradeDamage()
+    public void WantUpgradeDamage()
     {
         dmgUpgrade++;
         SetText(upgradeText[0], dmgUpgrade.ToString(), false);
         upgradePrice += 200;
     }
 
-    public void wantUpgradePenetration()
+    public void WantUpgradePenetration()
     {
         penetrationUpgrade++;
         SetText(upgradeText[1], penetrationUpgrade.ToString(), false);
         upgradePrice += 300;
     }
 
-    public void wantUpgradeFiringSpeed()
+    public void WantUpgradeFiringSpeed()
     {
         firingUpgrade++;
         SetText(upgradeText[2], firingUpgrade.ToString(), false);
         upgradePrice += 200;
+    }
+
+    public void ResetCart()
+    {
+        dmgUpgrade = gunScript.dmgUpgrade;
+        firingUpgrade = gunScript.firingUpgrade;
+        penetrationUpgrade = gunScript.penetrationUpgrade;
+        UpdateText();
     }
 
     public void PurchaseItem()
@@ -236,6 +276,7 @@ public class WorldInformationProvider : MonoBehaviour
         gunScript.penetrationUpgrade = penetrationUpgrade;
         controller.gun = guns[currentGunIndex];
         gunScript = guns[currentGunIndex].GetComponent<IGun>();
+        UpdateText();
         controller.trinket = trinkets[currentTrinketIndex];
     }
 }

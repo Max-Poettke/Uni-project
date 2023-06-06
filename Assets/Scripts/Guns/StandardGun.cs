@@ -13,7 +13,7 @@ public class StandardGun : MonoBehaviour, IGun
     
     public float dmgIncrement = 5f;
     public float penetrationIncrement = 1f;
-    public float firingIncrement = 1.3f; 
+    public float firingIncrement = 1.1f; 
     public int dmgUpgrade { get; set; }
     public int firingUpgrade {get; set; }
     public int penetrationUpgrade {get; set; }
