@@ -39,11 +39,15 @@ public class StandardGun : MonoBehaviour, IGun
         cantFire = true;
     }
 
-    public void Upgrade()
+    public void Upgrade(int dmgIndex, int penetrationIndex, int firingIndex)
     {
         var projScript = projectile.GetComponent<StandardProjectile>();
-        projScript.damage += dmgIncrement;
-        projScript.hp += (int) penetrationIncrement;
-        firingCooldown /= firingIncrement;
+        projScript.damage += dmgIncrement * firingIndex;
+        projScript.hp += (int) penetrationIncrement * penetrationIndex;
+        for (int i = 0; i < firingIndex; i ++)
+        {
+            firingCooldown /= firingIncrement;    
+        }
+        
     }
 }

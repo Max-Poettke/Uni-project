@@ -55,6 +55,7 @@ public class ShotGunProjectile : MonoBehaviour, IMoveable, IKillable
     }
     public void Die()
     {
+        Debug.Log("Killed ShotGunProjectile");
         Destroy(gameObject);
     }
     

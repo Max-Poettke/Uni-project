@@ -8,5 +8,5 @@ public interface IGun
     int firingUpgrade { get; set; }
     int penetrationUpgrade { get; set;}
     void Fire();
-    void Upgrade();
+    void Upgrade(int damageIndex, int penetrationIndex, int firingIndex);
 }

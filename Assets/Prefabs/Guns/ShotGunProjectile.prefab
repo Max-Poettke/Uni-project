@@ -33,8 +33,8 @@ Transform:
   m_GameObject: {fileID: 969198404510156953}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.86, y: 0, z: -0.019670963}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.12, y: 0.12, z: 0.12}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -325,10 +325,10 @@ MonoBehaviour:
   hp: 5
   explosionPrefab: {fileID: 2046547038296772661, guid: 7607552e68f36a44d9d306c949601d3c, type: 3}
   targetTransform: {fileID: 0}
-  speed: 2
+  speed: 40
   armorPenetrationFactor: 1
   damage: 3
-  lifeTime: 1
+  lifeTime: 0.1
 --- !u!96 &3755216893989761801
 TrailRenderer:
   serializedVersion: 2
@@ -371,7 +371,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 1
+  m_Time: 0.1
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -379,8 +379,8 @@ TrailRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.0033788942
-        value: 0.1640625
+        time: 0
+        value: 0.0859375
         inSlope: 0
         outSlope: 0
         tangentMode: 0

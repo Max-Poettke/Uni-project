@@ -5950,6 +5950,7 @@ MonoBehaviour:
   - {fileID: 6819866625338400234, guid: c5716138484166f4ba9d72a7b1f1e882, type: 3}
   guns:
   - {fileID: 5547575382887373634, guid: bfd0dfd5687d00947a8b4b4a4623bba3, type: 3}
+  - {fileID: 792314364629669277, guid: f52100c9104e32a44929b0b733bc7b22, type: 3}
   trinkets:
   - {fileID: 2202551688111599593, guid: 4a911e6df1b683045a78ed290f357148, type: 3}
   prices: []

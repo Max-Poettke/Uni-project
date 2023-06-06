@@ -230,10 +230,10 @@ public class WorldInformationProvider : MonoBehaviour
         SetText(textObjects[1].GetComponent<TMP_Text>(), guns[currentGunIndex].name, shopKeep.purchasedItems[1][currentGunIndex]);
         SetText(textObjects[2].GetComponent<TMP_Text>(), trinkets[currentTrinketIndex].name, shopKeep.purchasedItems[2][currentTrinketIndex]);
         controller.ship = ships[currentShipIndex];
+        gunScript.Upgrade(dmgUpgrade - gunScript.dmgUpgrade, penetrationUpgrade - gunScript.penetrationUpgrade, firingUpgrade - gunScript.firingUpgrade);
         gunScript.dmgUpgrade = dmgUpgrade;
         gunScript.firingUpgrade = firingUpgrade;
         gunScript.penetrationUpgrade = penetrationUpgrade;
-        gunScript.Upgrade();
         controller.gun = guns[currentGunIndex];
         gunScript = guns[currentGunIndex].GetComponent<IGun>();
         controller.trinket = trinkets[currentTrinketIndex];
