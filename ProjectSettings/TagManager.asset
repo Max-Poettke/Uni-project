@@ -15,6 +15,7 @@ TagManager:
   - Vulnerability
   - TextParent
   - WorldInformationProvider
+  - Shell
   layers:
   - Default
   - TransparentFX

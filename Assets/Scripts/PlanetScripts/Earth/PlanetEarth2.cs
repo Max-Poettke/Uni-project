@@ -1,9 +1,10 @@
 using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlanetIce3 : MonoBehaviour, IPlanet
+public class PlanetEarth2 : MonoBehaviour, IPlanet
 {
     [SerializeField] private float hp;
     [SerializeField] private float armor;
@@ -11,37 +12,31 @@ public class PlanetIce3 : MonoBehaviour, IPlanet
     [SerializeField] private GameObject standardProjectile;
     [SerializeField] private GameObject boulderProjectile;
     [SerializeField] private GameObject vulnerabilityPrefab;
+    [SerializeField] private GameObject shellPrefab;
     [SerializeField] private Transform distanceKeeperTransform;
     [SerializeField] private float defaultProjectileSpeed;
     [SerializeField] private AudioSource deathSound;
     [SerializeField] private ParticleSystem deathAnimation;
 
     private Slider slider;
-    private bool isWave = false;
     private float chanceToSpawnBoulder = 0;
     private float initialScale;
     private float initialHp;
     private int phase = 0;
+    private bool isWave = false;
     public Transform playerTransform;
     private GameObject vulnerability;
+    private GameObject shell;
 
     private Coroutine vulnerabilityRoutine;
     private Coroutine shootingRoutine;
+    private Coroutine protectionRoutine;
+    private Coroutine shellRoutine;
     private InLevelControl controller;
     private PlanetOverlaps planetOverlaps;
     void Start()
     {
-        standardProjectile.TryGetComponent(out ISplitter splitter);
-        if (splitter != null)
-        {
-            splitter.SetChanceToSplit(0.3f);    
-        }
-        
-        boulderProjectile.TryGetComponent(out ISplitter splitten);
-        if (splitten != null)
-        {
-            splitten.SetChanceToSplit(0.3f);    
-        }
+        standardProjectile.GetComponent<IHp>();
         planetOverlaps = GameObject.FindGameObjectWithTag("GameMaster").GetComponent<PlanetOverlaps>();
         planetOverlaps.planet = gameObject;
         planetOverlaps.planetScript = this;
@@ -54,6 +49,7 @@ public class PlanetIce3 : MonoBehaviour, IPlanet
         {
             shootingRoutine = StartCoroutine(FireContinuously());
             vulnerabilityRoutine = StartCoroutine(InstantiateVulnerability());
+            protectionRoutine = StartCoroutine(InstantiateProtection());
         }
     }
     
@@ -64,10 +60,12 @@ public class PlanetIce3 : MonoBehaviour, IPlanet
         {
             Destroy(vulnerability);
         }
-        deathAnimation.Play();
+        
         deathSound.Play();
+        deathAnimation.Play();
         this.enabled = false;
         gameObject.GetComponent<MeshRenderer>().enabled = false;
+        //Destroy(gameObject);
     }
 
     public void TakeDamage(float damage, float armorPenetrationFactor)
@@ -83,7 +81,6 @@ public class PlanetIce3 : MonoBehaviour, IPlanet
 
     public void FireProjectile()
     {
-        Debug.Log(chanceToSpawnBoulder);
         if (controller.died) return;
         GameObject projectile;
         if (Random.Range(0f, 1f) < chanceToSpawnBoulder)
@@ -94,7 +91,7 @@ public class PlanetIce3 : MonoBehaviour, IPlanet
         {
             projectile = Instantiate(standardProjectile);    
         }
-        
+
         projectile.TryGetComponent(out ISpeedChangeable speedChangeable);
         if (speedChangeable != null)
         {
@@ -117,19 +114,19 @@ public class PlanetIce3 : MonoBehaviour, IPlanet
     {
         armor++;
         firingRate -= 0.07f;
-        Destroy(vulnerability);
         chanceToSpawnBoulder = 1f / 6f;
-        //StartCoroutine(DeactivateMobility(1f));
+        Destroy(vulnerability);
+        SpawnWave(8);
         Debug.Log("OneThird called");
     }
 
     public void TwoThirds()
     {
         armor += 2;
-        firingRate -= 0.05f;
+        firingRate -= 0.07f;
         chanceToSpawnBoulder = 2f / 6f;
         Destroy(vulnerability);
-        //StartCoroutine(DeactivateMobility(1.5f));
+        SpawnWave(15);
         Debug.Log("TwoThirds called");
     }
     
@@ -142,12 +139,15 @@ public class PlanetIce3 : MonoBehaviour, IPlanet
         }
     }
 
-    public IEnumerator DeactivateMobility(float duration)
+    public void SpawnWave(int amount)
     {
-        yield return new WaitForSeconds(1f);
-        controller.isInhibited = true;
-        yield return new WaitForSeconds(duration);
-        controller.isInhibited = false;
+        isWave = true;
+        while (amount > 0)
+        {
+            FireProjectile();
+            amount--;
+        }
+        isWave = false;
     }
 
     public IEnumerator InstantiateVulnerability()
@@ -166,6 +166,18 @@ public class PlanetIce3 : MonoBehaviour, IPlanet
                 vulnerability.transform.LookAt(playerTransform);
                 vulnerability.transform.Rotate(Random.Range(-35f, 5f), 0f, 0f);
                 vulnerability.transform.position = transform.position + vulnerability.transform.forward * distance;
+            }
+        }
+    }
+    
+    public IEnumerator InstantiateProtection()
+    {
+        while (!controller.died)
+        {
+            yield return new WaitForSeconds(Random.Range(8, 14));
+            if (shell == null)
+            {
+                shell = Instantiate(shellPrefab,gameObject.transform);
             }
         }
     }

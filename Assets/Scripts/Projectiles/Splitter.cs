@@ -59,7 +59,7 @@ public class Splitter : MonoBehaviour, IHp, ISplitter, ISpeedChangeable
     public void TakeDamage(float damage, float armorPenetrationFactor)
     {
         hp -= damage;
-        if (hp <= 0)
+        if (hp == 0)
         {
             Die();
         }
